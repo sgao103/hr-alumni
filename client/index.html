@@ -11,14 +11,13 @@
     <link rel="stylesheet" href="lib/Materialize/dist/css/materialize.min.css" type="text/css" media="screen,projection"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen,projection"/>
 
-    <script src="lib/angular/angular.min.js"></script>
-    <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
 
     <script src="app/app.js"></script>
   </head>
 
-  <body ng-app="myApp">
-<<<<<<< HEAD
+  <body ng-app="app">
     <nav class="white" role="navigation" >
      <div class="nav-wrapper container">
       <a id="logo-container" href="#" class="brand-logo" ui-sref="home">HR Alumni</a>
@@ -40,51 +39,30 @@
       </ul>
       <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
     </div>
-     </div>
-=======
-    <nav class="white" role="navigation">
-      <div class="nav-wrapper container">
-        <a id="logo-container" href="#" class="brand-logo" ui-sref="home">HR Alumni</a>
-        <ul class="right hide-on-med-and-down">
-          <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
-          <li><a ui-sref="profiles">Profiles</a></li>
-          <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
-          <li><a ui-sref="login">Login</a></li>
-          <li><a ui-sref="logout">Logout</a></li>
-        </ul>
-        <ul id="slide-out" class="side-nav">
-          <!-- <li><a ui-sref="createProfile">CreateProfile</a></li> -->
-          <li><a ui-sref="profiles">Profiles</a></li>
-          <!-- <li><a ui-sref="profile">Individual Profile</a></li> -->
-          <li><a ui-sref="login">Login</a></li>
-          <li><a ui-sref="logout">Logout</a></li>
-        </ul>
-        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
-      </div>
->>>>>>> Add Materialize to Bower and update paths
     </nav>
 
     <div class="container">
-      <div ui-view></div>
+      <div ui-view="mainContent"></div>
     </div>
 
-<<<<<<< HEAD
-
-    <!--services -->
+    <!-- Services -->
      <script src="app/jobPostings/services/jobPostingFactory.js" ></script>
 
-    <!--controllers-->
+    <!-- Controllers -->
+     <script src="app/home/homeCtrl.js"></script>
      <script src="app/jobPostings/jobPostingPost/jobPostingPostCtrl.js"></script>
      <script src="app/jobPostings/jobPostingSearch/jobPostingSearchCtrl.js"></script>
      <script src="app/jobPostings/jobPostingSpecific/jobPostingSpecificCtrl.js"></script>
 
     <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="js/materialize.min.js"></script>
-=======
+
     <script src="lib/jquery/dist/jquery.min.js"></script> <!--Import jQuery before materialize.js-->
     <script src="lib/Materialize/dist/js/materialize.min.js"></script>
+
     
->>>>>>> Add Materialize to Bower and update paths
+
+    <script src="app/fakeData.js"></script>
     <script src="js/init.js"></script>
 
   </body>
