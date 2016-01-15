@@ -84,3 +84,10 @@ footer
   padding-top: 0px;
   text-align: center;
 }
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}

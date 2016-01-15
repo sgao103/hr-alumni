@@ -2,11 +2,12 @@ var port = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var session = require('express-session');
 var util = require('./config/utils.js');
 var handler = require('./config/request-handler.js');
-var bodyParser  = require('body-parser'); 
-
+var bodyParser  = require('body-parser');
+var jobPostingController = require('./jobs/jobPostingController')
 
   // Express 4 allows us to use multiple routers with their own configurations
   var questionsRouter = express.Router();
@@ -71,7 +72,7 @@ app.get('/auth/github',
   }),
   function(req, res) {
     console.log('req', req);
-    console.log('res', res); 
+    console.log('res', res);
   });
 
 app.get('/auth/github/callback',
@@ -79,12 +80,12 @@ app.get('/auth/github/callback',
     failureRedirect: '/login'
   })
   ,function(req, res) {
-    // console.log('req',req.user); 
+    // console.log('req',req.user);
     var data= {
       body: req.user,
       fromGitHub: true
     }
-    console.log('data here: ', data); 
+    console.log('data here: ', data);
     handler.createProfile(data, res)
     // res.redirect('/');
   });
@@ -96,7 +97,12 @@ app.get('/', function(req, res) {
 app.get('/api/profiles', handler.findAll);
 app.post('/api/profiles', handler.createProfile);
 app.get('/api/profile/:githubName', handler.findOne);
-app.post('/api/updateProfile', handler.updateProfile)
+app.post('/api/updateProfile', handler.updateProfile);
+
+
+app.get('/api/jobPostings', jobPostingController.getJobPosting);
+app.post('/api/jobPostings', jobPostingController.createJobPosting);
+app.get('/api/jobPostings/:specificJob',jobPostingController.specificJobPosting)
 
 app.listen(port, function() {
   console.log('Server started on port: ' + port);

@@ -1,4 +1,10 @@
-angular.module('myApp', ['ui.router'])
+angular.module('myApp', ['ui.router',
+    'jobPosting.factory',
+    'jobPosting.controller.jobPostingPost',
+    'jobPosting.controller.jobPostingSearch',
+    'jobPosting.controller.jobPostingSpecific'
+
+])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
@@ -13,7 +19,7 @@ angular.module('myApp', ['ui.router'])
 
     })
     // .state('createProfile', {
-    //   url: '/createProfile', 
+    //   url: '/createProfile',
     //   templateUrl: 'app/views/createProfile.html'
     // })
     .state('login', {
@@ -28,18 +34,43 @@ angular.module('myApp', ['ui.router'])
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html'
     })
+  .state('jobPostings', {
+      templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
+  })
+  .state('jobPostings.Search', {
+      templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
+      controller : 'jobSearchingCtrl'
+  })
+  .state('jobPostings.Post', {
+      //url: '/jobPostings',
+      templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
+      controller : 'jobPostingCtrl',
+  })
+  .state('jobPostings.SpecificJob',{
+    params : {
+       jobTitle : null,
+       description : null,
+       company : null,
+       experience : null,
+       companyLinkedIn : null
+    },
+     templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
+     controller : 'specificJobCtrl',
+     parent: 'jobPostings',
+
+  })
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
 
-  $state.transitionTo('profiles.profile'); 
+  $state.transitionTo('profiles.profile');
 
 }])
 
 .controller('profileCtrl', ['$scope', 'Profile', function ($scope, Profile) {
-  console.log('controller gets called'); 
-  // $scope.currentProfile= Profile.getProfile(); 
-  console.log('currentProfile where it counts', $scope.currentProfile); 
+  console.log('controller gets called');
+  // $scope.currentProfile= Profile.getProfile();
+  console.log('currentProfile where it counts', $scope.currentProfile);
 }])
 
 .controller('profilesCtrl', ['$scope', '$http', 'HttpRequest', 'Profile', function ($scope, $http, HttpRequest, Profile) {
@@ -48,9 +79,9 @@ angular.module('myApp', ['ui.router'])
     .then(function (res) {
       $scope.profiles= res.data;
       $scope.setProfile= function (profile) {
-        console.log('set profile called'); 
-        $scope.currentProfile= Profile.setProfile(profile); 
-        console.log('currentProfile', $scope.currentProfile); 
+        console.log('set profile called');
+        $scope.currentProfile= Profile.setProfile(profile);
+        console.log('currentProfile', $scope.currentProfile);
       }
     });
 
@@ -72,7 +103,7 @@ angular.module('myApp', ['ui.router'])
 // }])
 
 .controller('updateProfileCtrl', ['$scope', '$stateParams','HttpRequest', function ($scope, $stateParams, HttpRequest){
-  console.log('$stateParams are: ', $stateParams); 
+  console.log('$stateParams are: ', $stateParams);
   // redirects to /updateProfile/:githubName
   // $scope.submitProfile = function (isValid, formData) {
   //       console.log('formData', formData);
@@ -91,15 +122,15 @@ angular.module('myApp', ['ui.router'])
   HttpRequest.getProfile($stateParams.githubName)
     .then(function (res) {
       $scope.data= res.data;
-      console.log('profile data: ', res.data[0]);  
-      console.log('contact data: ', res.data[0].contact); 
+      console.log('profile data: ', res.data[0]);
+      console.log('contact data: ', res.data[0].contact);
       // $scope.setProfile= function (profile) {
-      //   console.log('set profile called'); 
-      //   $scope.currentProfile= Profile.setProfile(profile); 
-      //   console.log('currentProfile', $scope.currentProfile); 
+      //   console.log('set profile called');
+      //   $scope.currentProfile= Profile.setProfile(profile);
+      //   console.log('currentProfile', $scope.currentProfile);
       // }
-      
-      
+
+
     })
 
 }])
@@ -109,10 +140,10 @@ angular.module('myApp', ['ui.router'])
     HttpRequest.login()
       .then(
         function (res) {
-          console.log('res to login', res); 
+          console.log('res to login', res);
         },
         function (err) {
-          console.log('there was an error'); 
+          console.log('there was an error');
         }
       )
   }
@@ -139,7 +170,7 @@ angular.module('myApp', ['ui.router'])
       method: 'GET',
       url: '/api/profiles'
     }).success(function(result){
-      deferred.resolve(result); 
+      deferred.resolve(result);
     }).error(function (result){
       deferred.reject(result);
     })
@@ -164,15 +195,15 @@ angular.module('myApp', ['ui.router'])
 }])
 
 .factory('Profile', function (){
-  var storedProfile; 
+  var storedProfile;
   var setProfile= function (profile) {
-    console.log('profile set'); 
+    console.log('profile set');
     storedProfile= profile;
-    return storedProfile;  
+    return storedProfile;
   }
   var getProfile= function (){
-    console.log('get profile'); 
-    return storedProfile; 
+    console.log('get profile');
+    return storedProfile;
   }
   return {
     setProfile: setProfile,

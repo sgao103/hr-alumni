@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="row">
+    <form class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <input i type="text" ng-model="data.jobTitle" ng-model-options='{debounce : 500}' class="validate">
+                <label >Job Title</label>
+            </div>
+            <div class="input-field col s6">
+                <input type="text" ng-model="data.company" ng-model-options='{debounce : 500}' class="validate">
+                <label >Company</label>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col s6" ng-repeat="jobPosting in relevantJobPostings">
+        <div class="card light-green lighten-4  ">
+            <div class="card-content ">
+                <span class="card-title">{{jobPosting.jobTitle}}</span>
+                <p>Click below to browse through all the jobs posted exclusively by HR alumni.
+                    Feel free to get in touch with them via the chat and get some tips</p>
+            </div>
+            <div class="card-action center">
+                <a ng-click="goToJob(jobPosting)">Go to Job</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
