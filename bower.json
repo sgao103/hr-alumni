@@ -4,6 +4,8 @@
   "homepage": "https://github.com/HRR-TeamTesla/hr-alumni",
   "dependencies": {
     "angular": "~1.4.8",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "jquery": "~2.2.0",
+    "Materialize": "materialize#~0.97.5"
   }
 }
