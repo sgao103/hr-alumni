@@ -1,11 +1,12 @@
 angular.module('app', ['ui.router',
     'app.home',
+    'app.login',
+    'util.http',
     'jobPosting.factory',
     'jobPosting.controller.jobPostingPost',
     'jobPosting.controller.jobPostingSearch',
     'jobPosting.controller.jobPostingSpecific'
 ])
-
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
@@ -19,18 +20,18 @@ angular.module('app', ['ui.router',
         }
       }
     })
+    .state('login', {
+      url: '/login',
+      views: {
+        'mainContent': {
+          templateUrl: 'app/login/login.html',
+          controller:  'homeCtrl'
+        }
+      }
+    })
     .state('profiles', {
       url: '/profiles',
       templateUrl: 'app/views/profiles.html'
-
-    })
-    // .state('createProfile', {
-    //   url: '/createProfile',
-    //   templateUrl: 'app/views/createProfile.html'
-    // })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'app/views/login.html'
     })
     .state('profiles.profile', {
       url: '',
@@ -40,29 +41,29 @@ angular.module('app', ['ui.router',
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html'
     })
-  .state('jobPostings', {
+    .state('jobPostings', {
       templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
-  })
-  .state('jobPostings.Search', {
+    })
+    .state('jobPostings.Search', {
       templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
       controller : 'jobSearchingCtrl'
-  })
-  .state('jobPostings.Post', {
+    })
+    .state('jobPostings.Post', {
       //url: '/jobPostings',
       templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
       controller : 'jobPostingCtrl',
-  })
-  .state('jobPostings.SpecificJob',{
-    params : {
-       jobTitle : null,
-       description : null,
-       company : null,
-       experience : null,
-       companyLinkedIn : null
-    },
-     templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
-     controller : 'specificJobCtrl',
-     parent: 'jobPostings',
+    })
+    .state('jobPostings.SpecificJob',{
+      params : {
+        jobTitle : null,
+        description : null,
+        company : null,
+        experience : null,
+        companyLinkedIn : null
+      },
+      templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
+      controller : 'specificJobCtrl',
+      parent: 'jobPostings',
 
   })
 }])
@@ -137,65 +138,6 @@ angular.module('app', ['ui.router',
 
     })
 
-}])
-
-.controller('loginCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest) {
-  $scope.login= function (){
-    HttpRequest.login()
-      .then(
-        function (res) {
-          console.log('res to login', res);
-        },
-        function (err) {
-          console.log('there was an error');
-        }
-      )
-  }
-}])
-
-.factory('HttpRequest', ['$http', '$q', function ($http, $q){
-  var deferred= $q.defer();
-  var submitProfile = function (isValid, data) {
-      console.log('Second isValid: ', isValid);
-    if (isValid) {
-        console.log('data does it get here>=? ', data);
-        return $http({
-            method: 'POST',
-            url: '/api/updateProfile',
-            data: data
-        })
-    } else {
-
-    }
-  };
-
-  var getProfiles= function () {
-    return $http({
-      method: 'GET',
-      url: '/api/profiles'
-    }).success(function(result){
-      deferred.resolve(result); 
-    }).error(function (result){
-      deferred.reject(result);
-    })
-  }
-
-  var getProfile= function (githubName){
-    return $http({
-      method: 'GET',
-      url: '/api/profile/'+githubName
-    }).success(function(result){
-      deferred.resolve(result);
-    }).error(function (result){
-      deferred.reject(result);
-    })
-  }
-
-  return {
-    submitProfile: submitProfile,
-    getProfiles: getProfiles,
-    getProfile: getProfile
-  }
 }])
 
 .factory('Profile', function (){
