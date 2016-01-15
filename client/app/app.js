@@ -1,6 +1,7 @@
 angular.module('app', ['ui.router',
     'app.home',
     'app.login',
+    'app.profiles',
     'util.http',
     'jobPosting.factory',
     'jobPosting.controller.jobPostingPost',
@@ -25,17 +26,23 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent': {
           templateUrl: 'app/login/login.html',
-          controller:  'homeCtrl'
+          controller:  'loginCtrl'
         }
       }
     })
     .state('profiles', {
       url: '/profiles',
-      templateUrl: 'app/views/profiles.html'
+      views: {
+        'mainContent': {
+          templateUrl: 'app/profiles/profiles.html', // plural
+          controller:  'profilesCtrl'
+        }
+      }
     })
     .state('profiles.profile', {
       url: '',
-      templateUrl: 'app/views/profile.html'
+      templateUrl: 'app/profiles/profile.html', // singular
+      controller:  'profileCtrl'
     })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
@@ -66,37 +73,6 @@ angular.module('app', ['ui.router',
       parent: 'jobPostings',
 
   })
-}])
-
-.controller('profileCtrl', ['$scope', 'Profile', function ($scope, Profile) {
-  console.log('controller gets called');
-  // $scope.currentProfile= Profile.getProfile();
-  console.log('currentProfile where it counts', $scope.currentProfile);
-}])
-
-.controller('profilesCtrl', ['$scope', '$http', 'HttpRequest', 'Profile', function ($scope, $http, HttpRequest, Profile) {
-
-  HttpRequest.getProfiles()
-    .then(function (res) {
-
-      // STUBBED THIS OUT FOR TESTING PURPOSES
-      // $scope.profiles= res.data;
-      $scope.profiles = fakeData;
-
-      $scope.setProfile= function (profile) {
-        console.log('set profile called');
-        $scope.currentProfile= Profile.setProfile(profile);
-        console.log('currentProfile', $scope.currentProfile);
-      }
-    });
-
-    // used for showing the modal in profiles.html
-    $scope.modalDetails = function(profile){
-        console.log(profile);
-        $scope.profile = profile;
-        $('#modalDetails').openModal();
-    };
-
 }])
 
 // .controller('createProfileCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest){

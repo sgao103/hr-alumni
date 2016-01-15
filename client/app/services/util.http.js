@@ -21,7 +21,6 @@ angular.module('util.http', ['ui.router'])
       method: 'GET',
       url: '/api/profiles'
     }).success(function(result){
-      // deferred.resolve(result); 
       deferred.resolve(result); 
     }).error(function (result){
       deferred.reject(result);
