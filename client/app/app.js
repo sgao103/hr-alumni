@@ -35,13 +35,9 @@ angular.module('myApp', ['ui.router',
       templateUrl: 'app/views/updateProfile.html'
     })
   .state('jobPostings', {
-      //url: '/jobPostings',
-      //abstract : true,
       templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
-      //controller : 'jobPostingCtrl'
   })
   .state('jobPostings.Search', {
-      //url: '/jobPostings',
       templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
       controller : 'jobSearchingCtrl'
   })
@@ -49,7 +45,6 @@ angular.module('myApp', ['ui.router',
       //url: '/jobPostings',
       templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
       controller : 'jobPostingCtrl',
-
   })
   .state('jobPostings.SpecificJob',{
     params : {
@@ -153,120 +148,6 @@ angular.module('myApp', ['ui.router',
       )
   }
 }])
-
-
-//.controller('jobPostingCtrl',['$scope','$http','jobPostingFactory',function($scope,$http,jobPostingFactory){
-//
-//    $scope.data ={
-//        jobTitle : '',
-//        description : '',
-//        company : '',
-//        experience : '',
-//        companyLinkedIn : ''
-//    }
-//
-//    $scope.jobPostingSubmit = function(){
-//
-//        jobPostingFactory.postJob($scope.data).then(function(data){
-//            console.log(data)
-//        })
-//    }
-//
-//}])
-
-//.controller('jobSearchingCtrl',['$scope','$http','jobPostingFactory','$state',function($scope,$http,jobPostingFactory,$state){
-//
-//    $scope.data ={
-//        jobTitle : '',
-//        company : '',
-//    };
-//
-//    $scope.relevantJobPostings = ''
-//
-//    $scope.$watch('[data.jobTitle,data.company]',function(){
-//        if($scope.data.jobTitle !== '' || $scope.data.company !== ''){
-//            jobPostingFactory.getJob($scope.data).then(function(data){
-//                console.log(data)
-//                $scope.relevantJobPostings = data
-//            });
-//        }
-//
-//    })
-//
-//    $scope.goToJob = function(job){
-//        console.log('go job',job)
-//        $state.go('jobPostings.SpecificJob',job);
-//
-//    }
-//
-//}])
-
-//.controller('specificJobCtrl',['$scope','$http','jobPostingFactory','$stateParams',function($scope,$http,jobPostingFactory,$stateParams){
-//
-//    $scope.data = {
-//        specificJob : {
-//            jobTitle : $stateParams.jobTitle,
-//            description : $stateParams.description,
-//            company : $stateParams.company,
-//            experience : $stateParams.experience,
-//            companyLinkedIn : $stateParams.companyLinkedIn
-//        }
-//    }
-//
-//    console.log('specfic',$scope.data)
-//
-//}])
-
-
-//.factory('jobPostingFactory',function($http){
-//
-//    var apiUrl = 'http://localhost:3000';
-//
-//    var postJob = function(jobPosting){
-//
-//        return $http.post(apiUrl + '/api/jobPostings', jobPosting)
-//            .then(function(res) {
-//                return res.data;
-//            }, function(err) {
-//                return err;
-//            });
-//
-//    };
-//
-//    var getJob = function(jobSearch){
-//
-//        return $http.get(apiUrl + '/api/jobPostings', {
-//            params : {
-//                jobTitle : jobSearch.jobTitle,
-//                company : jobSearch.company
-//            }
-//        })
-//            .then(function(res) {
-//                return res.data;
-//            }, function(err) {
-//                return err;
-//            });
-//
-//    };
-//
-//    var specificJob = function(jobID){
-//        return $http.get(apiUrl + '/api/jobPostings/' + jobID)
-//            .then(function(res) {
-//                return res.data;
-//            }, function(err) {
-//                return err;
-//            });
-//    }
-//
-//
-//    return{
-//        postJob : postJob,
-//        getJob : getJob,
-//        specificJob : specificJob
-//    }
-//
-//})
-
 
 .factory('HttpRequest', ['$http', '$q', function ($http, $q){
   var deferred= $q.defer();
