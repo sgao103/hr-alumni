@@ -1,17 +1,23 @@
-angular.module('myApp', ['ui.router',
+angular.module('app', ['ui.router',
+    'app.home',
     'jobPosting.factory',
     'jobPosting.controller.jobPostingPost',
     'jobPosting.controller.jobPostingSearch',
     'jobPosting.controller.jobPostingSpecific'
-
 ])
+
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
   $stateProvider
     .state('home', {
       url:'/home',
-      templateUrl: 'app/views/home.html'
+      views: {
+        'mainContent': {
+          templateUrl: 'app/home/home.html',
+          controller:  'homeCtrl'
+        }
+      }
     })
     .state('profiles', {
       url: '/profiles',
@@ -61,12 +67,6 @@ angular.module('myApp', ['ui.router',
   })
 }])
 
-.controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
-
-  $state.transitionTo('profiles.profile');
-
-}])
-
 .controller('profileCtrl', ['$scope', 'Profile', function ($scope, Profile) {
   console.log('controller gets called');
   // $scope.currentProfile= Profile.getProfile();
@@ -77,7 +77,11 @@ angular.module('myApp', ['ui.router',
 
   HttpRequest.getProfiles()
     .then(function (res) {
-      $scope.profiles= res.data;
+
+      // STUBBED THIS OUT FOR TESTING PURPOSES
+      // $scope.profiles= res.data;
+      $scope.profiles = fakeData;
+
       $scope.setProfile= function (profile) {
         console.log('set profile called');
         $scope.currentProfile= Profile.setProfile(profile);
@@ -170,7 +174,7 @@ angular.module('myApp', ['ui.router',
       method: 'GET',
       url: '/api/profiles'
     }).success(function(result){
-      deferred.resolve(result);
+      deferred.resolve(result); 
     }).error(function (result){
       deferred.reject(result);
     })
