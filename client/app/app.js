@@ -65,7 +65,7 @@ angular.module('app', ['ui.router',
         }
       }
     })
-    .state('updateProfile', {
+    .state('app.updateProfile', {
       url: '/updateProfile/:githubName',
       views: {
         'mainContent@': {
