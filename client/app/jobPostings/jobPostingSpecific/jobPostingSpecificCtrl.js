@@ -1,4 +1,4 @@
-angular.module('jobPosting.controller.jobPostingSpecific', ['ui.router'])
+angular.module('jobPosting.jobPostingSpecific.controller', ['ui.router'])
 
 .controller('specificJobCtrl',['$scope','$http','jobPostingFactory','$stateParams',function($scope,$http,jobPostingFactory,$stateParams){
 

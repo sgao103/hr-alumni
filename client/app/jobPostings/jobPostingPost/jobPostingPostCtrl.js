@@ -1,4 +1,4 @@
-angular.module('jobPosting.controller.jobPostingPost', ['ui.router'])
+angular.module('jobPosting.jobPostingPost.controller', ['ui.router'])
 
     .controller('jobPostingCtrl',['$scope','$http','jobPostingFactory',function($scope,$http,jobPostingFactory){
 

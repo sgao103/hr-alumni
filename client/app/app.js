@@ -1,8 +1,8 @@
 angular.module('myApp', ['ui.router',
     'jobPosting.factory',
-    'jobPosting.controller.jobPostingPost',
-    'jobPosting.controller.jobPostingSearch',
-    'jobPosting.controller.jobPostingSpecific'
+    'jobPosting.jobPostingPost.controller',
+    'jobPosting.jobPostingSearch.controller',
+    'jobPosting.jobPostingSpecific.controller'
 
 ])
 
@@ -34,19 +34,19 @@ angular.module('myApp', ['ui.router',
       url: '/updateProfile/:githubName',
       templateUrl: 'app/views/updateProfile.html'
     })
-  .state('jobPostings', {
+    .state('jobPostings', {
       templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
-  })
-  .state('jobPostings.Search', {
+    })
+    .state('jobPostings.Search', {
       templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
       controller : 'jobSearchingCtrl'
-  })
-  .state('jobPostings.Post', {
+    })
+    .state('jobPostings.Post', {
       //url: '/jobPostings',
       templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
       controller : 'jobPostingCtrl',
-  })
-  .state('jobPostings.SpecificJob',{
+    })
+    .state('jobPostings.SpecificJob',{
     params : {
        jobTitle : null,
        description : null,
@@ -58,7 +58,7 @@ angular.module('myApp', ['ui.router',
      controller : 'specificJobCtrl',
      parent: 'jobPostings',
 
-  })
+    })
 }])
 
 .controller('homeCtrl', ['$scope','$state', function ($scope, $state) {
