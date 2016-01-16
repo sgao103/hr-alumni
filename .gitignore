@@ -4,3 +4,7 @@ node_modules/
 
 # Bower libraries
 lib/
+
+# Floobits
+.floo
+.flooignore

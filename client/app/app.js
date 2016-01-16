@@ -54,16 +54,19 @@ angular.module('app', ['ui.router',
           controller:  'UpdateProfileCtrl'
         }
       }
-    })
+    })    
     .state('jobPostings', {
-      templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
+      views: {
+        'mainContent': {
+          templateUrl: 'app/jobPostings/jobPosting/jobPostings.html',
+        }
+      }
     })
     .state('jobPostings.Search', {
       templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
       controller : 'jobSearchingCtrl'
     })
     .state('jobPostings.Post', {
-      //url: '/jobPostings',
       templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
       controller : 'jobPostingCtrl',
     })
@@ -78,6 +81,5 @@ angular.module('app', ['ui.router',
       templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
       controller : 'specificJobCtrl',
       parent: 'jobPostings',
-
   })
 }])
