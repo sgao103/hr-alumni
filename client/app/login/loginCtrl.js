@@ -1,6 +1,6 @@
-angular.module('app.login', ['ui.router', 'util.http'])
+angular.module('app.login', ['ui.router', 'httpFactory'])
 
-.controller('loginCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest) {
+.controller('LoginCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest) {
   $scope.login= function (){
     HttpRequest.login()
       .then(

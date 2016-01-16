@@ -1,4 +1,4 @@
-angular.module('util.http', ['ui.router'])
+angular.module('httpFactory', [])
 
 .factory('HttpRequest', ['$http', '$q', function ($http, $q){
   var deferred= $q.defer();

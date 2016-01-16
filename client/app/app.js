@@ -3,7 +3,8 @@ angular.module('app', ['ui.router',
     'app.login',
     'app.profiles',
     'app.updateProfile',
-    'util.http',
+    'profileFactory',
+    'httpFactory',
     'jobPosting.factory',
     'jobPosting.controller.jobPostingPost',
     'jobPosting.controller.jobPostingSearch',
@@ -18,7 +19,7 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent': {
           templateUrl: 'app/home/home.html',
-          controller:  'homeCtrl'
+          controller:  'HomeCtrl'
         }
       }
     })
@@ -27,7 +28,7 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent': {
           templateUrl: 'app/login/login.html',
-          controller:  'loginCtrl'
+          controller:  'LoginCtrl'
         }
       }
     })
@@ -36,21 +37,21 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent': {
           templateUrl: 'app/profiles/profiles.html', // plural
-          controller:  'profilesCtrl'
+          controller:  'ProfilesCtrl'
         }
       }
     })
     .state('profiles.profile', {
       url: '',
       templateUrl: 'app/profiles/profile.html', // singular
-      controller:  'profileCtrl'
+      controller:  'ProfileCtrl'
     })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
       views: {
         'mainContent': {
           templateUrl: 'app/updateProfile/updateProfile.html',
-          controller:  'updateProfileCtrl'
+          controller:  'UpdateProfileCtrl'
         }
       }
     })
