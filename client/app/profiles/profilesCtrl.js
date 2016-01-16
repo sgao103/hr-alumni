@@ -10,10 +10,7 @@ angular.module('app.profiles', ['ui.router'])
 
   HttpRequest.getProfiles()
     .then(function (res) {
-
-      // STUBBED THIS OUT FOR TESTING PURPOSES
-      // $scope.profiles= res.data;
-      $scope.profiles = fakeData;
+      $scope.profiles= res.data;
 
       $scope.setProfile= function (profile) {
         console.log('set profile called'); 

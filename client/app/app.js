@@ -2,6 +2,7 @@ angular.module('app', ['ui.router',
     'app.home',
     'app.login',
     'app.profiles',
+    'app.updateProfile',
     'util.http',
     'jobPosting.factory',
     'jobPosting.controller.jobPostingPost',
@@ -46,7 +47,12 @@ angular.module('app', ['ui.router',
     })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
-      templateUrl: 'app/views/updateProfile.html'
+      views: {
+        'mainContent': {
+          templateUrl: 'app/updateProfile/updateProfile.html',
+          controller:  'updateProfileCtrl'
+        }
+      }
     })
     .state('jobPostings', {
       templateUrl: 'app/jobPostings/jobPosting/jobPostings.html'
@@ -74,62 +80,3 @@ angular.module('app', ['ui.router',
 
   })
 }])
-
-// .controller('createProfileCtrl', ['$scope', 'HttpRequest', function ($scope, HttpRequest){
-//   $scope.submitProfile = function (isValid, formData) {
-//     console.log(formData);
-//     console.log('First isValid: ', isValid);
-//     // HttpRequest.submitProfile(isValid, formData);
-//   }
-// }])
-
-.controller('updateProfileCtrl', ['$scope', '$stateParams','HttpRequest', function ($scope, $stateParams, HttpRequest){
-  console.log('$stateParams are: ', $stateParams);
-  // redirects to /updateProfile/:githubName
-  // $scope.submitProfile = function (isValid, formData) {
-  //       console.log('formData', formData);
-  //       console.log('First isValid: ', isValid);
-  //       // HttpRequest.submitProfile(isValid, formData);
-  // }
-
-  $scope.submitProfile = function (isValid, formData) {
-
-        console.log('formData', $scope.data);
-        // console.log('First isValid: ', isValid);
-        HttpRequest.submitProfile(isValid, formData);
-  }
-
-  //prepopulation of data
-  HttpRequest.getProfile($stateParams.githubName)
-    .then(function (res) {
-      $scope.data= res.data;
-      console.log('profile data: ', res.data[0]);
-      console.log('contact data: ', res.data[0].contact);
-      // $scope.setProfile= function (profile) {
-      //   console.log('set profile called');
-      //   $scope.currentProfile= Profile.setProfile(profile);
-      //   console.log('currentProfile', $scope.currentProfile);
-      // }
-
-
-    })
-
-}])
-
-.factory('Profile', function (){
-  var storedProfile;
-  var setProfile= function (profile) {
-    console.log('profile set');
-    storedProfile= profile;
-    return storedProfile;
-  }
-  var getProfile= function (){
-    console.log('get profile');
-    return storedProfile;
-  }
-  return {
-    setProfile: setProfile,
-    getProfile: getProfile
-  }
-
-})
