@@ -6,9 +6,9 @@ angular.module('app', ['ui.router',
     'profileFactory',
     'httpFactory',
     'jobPosting.factory',
-    'jobPosting.controller.jobPostingPost',
-    'jobPosting.controller.jobPostingSearch',
-    'jobPosting.controller.jobPostingSpecific'
+    'jobPosting.jobPostingPost.controller',
+    'jobPosting.jobPostingSearch.controller',
+    'jobPosting.jobPostingSpecific.controller'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -54,7 +54,7 @@ angular.module('app', ['ui.router',
           controller:  'UpdateProfileCtrl'
         }
       }
-    })    
+    })
     .state('jobPostings', {
       views: {
         'mainContent': {
@@ -62,7 +62,7 @@ angular.module('app', ['ui.router',
         }
       }
     })
-    .state('jobPostings.Search', {
+      .state('jobPostings.Search', {
       templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
       controller : 'jobSearchingCtrl'
     })

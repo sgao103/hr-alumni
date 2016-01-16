@@ -8,3 +8,5 @@ lib/
 # Floobits
 .floo
 .flooignore
+
+server/config/credentials.js

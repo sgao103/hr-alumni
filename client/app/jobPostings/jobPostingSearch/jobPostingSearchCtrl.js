@@ -1,4 +1,4 @@
-angular.module('jobPosting.controller.jobPostingSearch', ['ui.router'])
+angular.module('jobPosting.jobPostingSearch.controller', ['ui.router'])
 
 .controller('jobSearchingCtrl',['$scope','$http','jobPostingFactory','$state',function($scope,$http,jobPostingFactory,$state){
 
@@ -17,10 +17,9 @@ angular.module('jobPosting.controller.jobPostingSearch', ['ui.router'])
             });
         }
 
-    })
+    });
 
     $scope.goToJob = function(job){
-        console.log('go job',job)
         $state.go('jobPostings.SpecificJob',job);
 
     }
