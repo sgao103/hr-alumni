@@ -3,9 +3,7 @@ angular.module('httpFactory', [])
 .factory('HttpRequest', ['$http', '$q', function ($http, $q){
   var deferred= $q.defer();
   var submitProfile = function (isValid, data) {
-      console.log('Second isValid: ', isValid);
     if (isValid) {
-        console.log('data does it get here>=? ', data);
         return $http({
             method: 'POST',
             url: '/api/updateProfile',

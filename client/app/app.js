@@ -1,21 +1,15 @@
 angular.module('app', ['ui.router',
-    'app.home',
-    'app.login',
-    'app.profiles',
-    'app.updateProfile',
+    'home.controller',
+    'login.controller',
+    'profiles.controller',
+    'updateProfile.controller',
     'jobPosting.factory',
-<<<<<<< HEAD
     'jobPosting.jobPostingPost.controller',
     'jobPosting.jobPostingSearch.controller',
-    'jobPosting.jobPostingSpecific.controller'
-=======
-    'jobPosting.controller.jobPostingPost',
-    'jobPosting.controller.jobPostingSearch',
-    'jobPosting.controller.jobPostingSpecific',
+    'jobPosting.jobPostingSpecific.controller',
     'userFactory',
     'profileFactory',
     'httpFactory'
->>>>>>> Refactor states to use nested views
 ])
 
 .run(function($rootScope, User, $state) {
@@ -66,31 +60,21 @@ angular.module('app', ['ui.router',
       url: 'profiles',
       views: {
         'mainContent@': {
-          templateUrl: 'app/profiles/profiles.html', // plural
+          templateUrl: 'app/profiles/profiles.html',
           controller:  'ProfilesCtrl'
         }
       }
     })
-    .state('profiles.profile', {
-      url: '',
-      templateUrl: 'app/profiles/profile.html', // singular
-      controller:  'ProfileCtrl'
-    })
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/updateProfile/updateProfile.html',
           controller:  'UpdateProfileCtrl'
         }
       }
-<<<<<<< HEAD
-    })
-    .state('jobPostings', {
-=======
     })    
     .state('app.jobPostings', {
->>>>>>> Refactor states to use nested views
       views: {
         'mainContent@': {
           templateUrl: 'app/jobPostings/jobPosting/jobPostings.html',

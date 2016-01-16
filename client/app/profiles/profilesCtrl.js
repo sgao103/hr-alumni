@@ -1,4 +1,4 @@
-angular.module('app.profiles', ['ui.router'])
+angular.module('profiles.controller', ['ui.router'])
 
 .controller('ProfilesCtrl', ['$scope', '$http', 'HttpRequest', 'Profile', function ($scope, $http, HttpRequest, Profile) {
 
