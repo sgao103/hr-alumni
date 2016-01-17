@@ -98,23 +98,23 @@ angular.module('app', ['ui.router',
         }
       }
     })
-    .state('jobPostings.Search', {
+    .state('app.jobPostings.Search', {
       views : {
-        'jobPostings@jobPostings' : {
+        'jobPostings@app.jobPostings' : {
           templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
           controller : 'jobSearchingCtrl'
         }
       }
     })
-    .state('jobPostings.Post', {
+    .state('app.jobPostings.Post', {
       views : {
-        'jobPostings@jobPostings' : {
+        'jobPostings@app.jobPostings' : {
           templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
           controller : 'jobPostingCtrl'
         }
       }
     })
-    .state('jobPostings.SpecificJob',{
+    .state('app.jobPostings.SpecificJob',{
       params : {
         jobTitle : null,
         description : null,
@@ -123,7 +123,7 @@ angular.module('app', ['ui.router',
         companyLinkedIn : null
       },
       views : {
-        'jobPostings@jobPostings' : {
+        'jobPostings@app.jobPostings' : {
           templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
           controller : 'specificJobCtrl',
         }
