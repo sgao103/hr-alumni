@@ -6,6 +6,8 @@
             <form class="forms forms-inline input-field ">
                 <input type="text" class="input-big width-50" id="query" ng-model="query">
                 <label for="query">Filter</label>
+                <input type="checkbox" id="hireable" ng-model="hireable.checked" ng-click="hireableFilter()">
+                <label for="hireable">Only Hireable</label>
             </form>
             <ul class="collection">
                 <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter:query">
