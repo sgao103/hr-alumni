@@ -7,31 +7,31 @@ angular.module('profiles.controller', ['ui.router'])
   });
 
   $scope.hireable = {};
-    console.log(this.hireable, 'before anything');  // logs undefined "before anything"
 
-    // OMG checked toggles!
   $scope.hireableFilter = function () {
-    console.log(this.hireable, 'before function');  // logs Object {checked: true} "before function"
-    this.hireable.value = true;
     if (this.hireable.checked) {
       console.log('box is checked');
+      console.log(this.profiles.filter(function(eachProfile){
+        return eachProfile.about.status && eachProfile.about.status !== '';
+      }), 'all profiles? this.profile.about.status');
+      console.log(this.profiles.filter(function(eachProfile){
+        return eachProfile.links.blog && eachProfile.links.blog !== '';
+      }), 'filter for blog first');
+      return this.profiles.filter(function(eachProfile){
+        return eachProfile.about.status && eachProfile.about.status !== '';
+      });
     }
     else {
       console.log('box is empty');
+      console.log(this.profiles[0].about.status, 'this.profiles.about.status');
     }
-    console.log(this.hireable, 'after function');  // logs Object {checked: true, value: true} "after function"
-    console.log($scope.hireable.checked.$modelValue);  // undefined
   };
 
-  $scope.myVar = 1;
+  // | filter:hireableFilter <tr ng-repeat="player in players | filter:{id: player_id, name:player_name} | filter:ageFilter">
 
-  $scope.$watch('hireable', function() {
-      alert('hey, myVar has changed!');
-  });
-
-  $scope.buttonClicked = function() {
-     $scope.myVar = 2; // This will trigger $watch expression to kick in
-  };
+  $scope.ageFilter = function (player) {
+      return (player.age > $scope.min_age && player.age < $scope.max_age);
+  }
 
   // used for showing the modal in profiles.html
   $scope.modalDetails = function(profile){
