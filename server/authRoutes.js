@@ -20,7 +20,7 @@ router.get('/github/callback',
   function(req, res) {
     userController.userExists(req.user.username)
       .then(function(user) {
-        if (user) res.redirect( '/#/auth/' + user._id ); // user exists, send ID to client for auth
+        if (user) res.redirect( '/#/auth/' + user._id ); // user exists, send ID to client for login
         else      userController.createUser({body:req.user, fromGitHub:true}, res); // user doesn't exist, create
       })
       .catch(function(err){
