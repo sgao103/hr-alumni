@@ -1,4 +1,4 @@
-angular.module('app.home', ['ui.router'])
+angular.module('home.controller', ['ui.router'])
 
 .controller('HomeCtrl', ['$scope','$state', function ($scope, $state) {
 

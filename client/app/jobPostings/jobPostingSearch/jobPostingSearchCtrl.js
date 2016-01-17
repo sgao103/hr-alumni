@@ -20,7 +20,7 @@ angular.module('jobPosting.jobPostingSearch.controller', ['ui.router'])
     });
 
     $scope.goToJob = function(job){
-        $state.go('jobPostings.SpecificJob',job);
+        $state.go('app.jobPostings.SpecificJob',job);
 
     }
 
