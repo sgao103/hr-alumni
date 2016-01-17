@@ -15,7 +15,6 @@ module.exports = function(apiRouter){
     apiRouter.get( '/users',             userController.findAll);
     apiRouter.get( '/users/:githubName', userController.findOne);
 
-    apiRouter.post('/users/signup',      userController.createUser);
     apiRouter.post('/users/login',       userController.login);
 
 
