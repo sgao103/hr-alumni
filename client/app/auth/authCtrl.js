@@ -8,5 +8,5 @@ angular.module('auth.controller', ['ui.router'])
   User.login(userID)
       .then(function() {
         $state.go('app.home')
-      })
-}])
+      });
+}]);

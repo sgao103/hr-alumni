@@ -1,68 +1,42 @@
-angular.module('userFactory', [])
+angular.module('userFactory', ['ui.router'])
 
 .factory('User', function($http, $state) {
 
-  var loggedIn = true;
+  var details = { 
+    name: window.localStorage.getItem('hr-alum.user.name') || 'Anonymous',
+    loggedIn: false
+  };
 
-  var apiUrl = 'http://localhost:5007'
+  var apiUrl = 'http://localhost:3000';
 
-  /*
-   * Sends login credentials from submit form to server
-   * Based on response, function enables login session and sets token in localStorage
-   * Setting historyRoot to true, creates a clean history path for current view
-   */
+  var loggedIn = function() {
+    return details.loggedIn;
+  };
 
-  // var login = function(credentials) {
-  //   $http.post(apiUrl + '/api/user/login', credentials).then(function(response) {
-  //     if (response.data.id !== undefined) {
-  //       loggedIn = true;
-  //       window.localStorage.setItem('which.userToken', response.data.id);
-  //       $ionicHistory.nextViewOptions({
-  //         historyRoot: true
-  //       })
-  //       $state.go('app.tagView')
-  //     }
-  //   })
-  // };
+  var login = function(userID) {
+    return $http.post(apiUrl + '/api/users/login', {_id: userID})
+                .then(function(response){
+                  if (response.data._id !== undefined) {
+                    details.loggedIn = true;
+                    details.name = response.data.name;
+                    window.localStorage.setItem('hr-alum.user.id', response.data._id);
+                    window.localStorage.setItem('hr-alum.user.name', response.data.name);
+                  }
+                });
+  };
 
-  var isloggedIn = function() {
-    return loggedIn;
-  }
-
-
-  /*
-   * Sends signUp credentials from submit form to server
-   */
-
-  // var signUp = function(credentials) {
-  //   $http.post(apiUrl + '/api/user/signup', credentials).then(function(response) {
-  //     if (response.data.id !== undefined) {
-  //       loggedIn = true;
-  //       window.localStorage['which.userToken'] = response.data.id;
-  //       $ionicHistory.nextViewOptions({
-  //         historyRoot: true
-  //       });
-  //       $state.go('app.tagView');
-  //     }
-  //   })
-  // };
-
-
-  /*
-   * Deletes current session on device
-   */
-
-  // var signOut = function() {
-  //   loggedIn = false;
-  //   window.localStorage.removeItem('which.userToken');
-  //   $state.go('app.login');
-  // };
+  var logout = function() {
+    details.loggedIn = false;
+    window.localStorage.removeItem('hr-alum.user.id');
+    window.localStorage.removeItem('hr-alum.user.name');
+    $state.go('app.login');
+  };
 
   return {
-    isloggedIn: isloggedIn,
-    // signUp: signUp,
-    // login: login,
-    // signOut: signOut
-  }
+    loggedIn: loggedIn,
+    details: details,
+    login: login,
+    logout: logout
+  };
 
 });

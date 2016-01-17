@@ -1,9 +1,25 @@
 var User = require('../users/userModel.js');
 
 
-exports.createProfile = function(req, res) {
+exports.userExists = function (githubName) {
+  return User.findOne({ 'contact.githubName':  githubName });
+};
 
-    if(req.fromGitHub) {
+exports.login = function (req, res) {
+    var userID = req.body._id;
+    User.findOne({ _id: userID  })
+      .then(function(user){
+        if (!user) res.sendStatus(401); // unauthorized: invalid credentials
+        else res.status(200).json( {_id: user._id, name: user.contact.name} ); // login successful
+      })
+      .catch(function(err){
+        throw err;
+      });
+}; 
+
+exports.createUser = function(req, res) {
+
+    if (req.fromGitHub) {
         var name = req.body['_json'].name;
         var profilePic= req.body['_json']['avatar_url'];
         var githubName = req.body.username;
@@ -21,28 +37,9 @@ exports.createProfile = function(req, res) {
         var project2  = '';
         var project3  = '';
     }
-    // else {
-    //   var firstName = req.body.firstName;
-    //   var lastName = req.body.lastName;
-    //   var githubName = req.body.github;
-    //   var email = req.body.email;
-    //   var location = req.body.location;
-    //   var summary = req.body.summary;
-    //   var status = req.body.status;
-    //   var companies = req.body.companies;
-    //   var languages = req.body.languages;
-    //   var blog = req.body.blog;
-    //   var website = req.body.website;
-    //   var linkedin = req.body.linkedin;
-    //   var github = req.body.github;
-    //   var project1  = req.body.project1;
-    //   var project2  = req.body.project2;
-    //   var project3  = req.body.project3;
-    // }
 
     var query= User.findOne({
-        'contact.githubName':  githubName
-
+        'contact.githubName': githubName
     });
 
     query.exec(function(err, user) {

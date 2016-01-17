@@ -1,6 +1,8 @@
 angular.module('app', ['ui.router',
+    'app.controller',
     'home.controller',
     'login.controller',
+    'auth.controller',
     'profiles.controller',
     'updateProfile.controller',
     'jobPosting.factory',
@@ -13,11 +15,17 @@ angular.module('app', ['ui.router',
 ])
 
 .run(function($rootScope, User, $state) {
+  // Attempt to log the user in if there is an
+  var userID = window.localStorage.getItem('hr-alum.user.id');
+  if ( userID ) User.login(userID);
+
+  // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if (!User.isloggedIn() && toState.name !== 'app.login' && toState.name !== 'app.home') {
+    if (!User.loggedIn() && toState.name !== 'app.login'   
+                         && toState.name !== 'app.auth'
+                         && toState.name !== 'app.home') {
       event.preventDefault();
-      // window.localStorage.setItem('userToken', ____ )
-      $state.go('app.login');
+      $state.go('app.home');
     }
   })
 })
@@ -25,16 +33,16 @@ angular.module('app', ['ui.router',
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
   $stateProvider
-
     .state('app', {
       url: '/',
       views: {
         'mainContent': {
           templateUrl: 'app/home/home.html',
-          controller:  'HomeCtrl'
+          controller:  'AppCtrl'
         },
         'header' :{
           templateUrl: 'app/_partials/nav.html',
+          controller:   'AppCtrl'
         }
       }
     })
@@ -56,6 +64,15 @@ angular.module('app', ['ui.router',
         }
       }
     })
+    .state('app.auth', { 
+      url: 'auth/:userID',  // Server routes back here after authenticating with GitHub
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/login/login.html',
+          controller:  'AuthCtrl'
+        }
+      }
+    })    
     .state('app.profiles', {
       url: 'profiles',
       views: {
@@ -66,7 +83,7 @@ angular.module('app', ['ui.router',
       }
     })
     .state('app.updateProfile', {
-      url: '/updateProfile/:githubName',
+      url: 'updateProfile/:githubName',
       views: {
         'mainContent@': {
           templateUrl: 'app/updateProfile/updateProfile.html',

@@ -17,7 +17,7 @@ angular.module('httpFactory', [])
   var getProfiles= function () {
     return $http({
       method: 'GET',
-      url: '/api/profiles'
+      url: '/api/users'
     }).success(function(result){
       deferred.resolve(result); 
     }).error(function (result){
@@ -28,7 +28,7 @@ angular.module('httpFactory', [])
   var getProfile= function (githubName){
     return $http({
       method: 'GET',
-      url: '/api/profile/'+githubName
+      url: '/api/users/'+githubName
     }).success(function(result){
       deferred.resolve(result);
     }).error(function (result){

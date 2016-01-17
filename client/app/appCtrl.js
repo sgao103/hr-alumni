@@ -2,20 +2,14 @@ angular.module('app.controller', [])
 
 .controller('AppCtrl', function($scope, $state, User) {
 
-  $scope.notLoggedIn = function() {
-    return !User.isloggedIn()
+  $scope.user = User.details; 
+
+  $scope.loggedIn = function() {
+    return User.loggedIn()
   };
 
-  // $scope.logOut = function() {
-  //   User.signOut();
-  // };
+  $scope.logout = function() {
+    User.logout();
+  };
 
-  // $scope.login = function() {
-  //   $state.go('app.login');
-  // };
-
-  // $scope.signUp = function() {
-  //   $state.go('app.signUp');
-  // };
-  
 })

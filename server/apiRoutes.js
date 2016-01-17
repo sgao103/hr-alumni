@@ -12,9 +12,11 @@ module.exports = function(apiRouter){
      See documentation at corresponding
      function in request-handler.js
      */
-    apiRouter.get('/profiles', userController.findAll);
-    apiRouter.post('/profiles', userController.createProfile);
-    apiRouter.get('/profile/:githubName', userController.findOne);
+    apiRouter.get( '/users',             userController.findAll);
+    apiRouter.get( '/users/:githubName', userController.findOne);
+
+    apiRouter.post('/users/signup',      userController.createUser);
+    apiRouter.post('/users/login',       userController.login);
 
 
     apiRouter.post('/updateProfile', userController.updateProfile);
