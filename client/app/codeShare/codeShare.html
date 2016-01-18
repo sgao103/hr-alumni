@@ -3,17 +3,21 @@
     <div class="s12 col">
 
       <h3>CodeShare</h3>
-      <a href="" ng-click="createCodeShare()" class="modal-trigger title">Create a new CodeShare</a>
+      <button ng-click="createCodeShare()" class="btn waves-effect waves-light col s12" style="margin-bottom:50px; margin-top:20px;">Create a New CodeShare</button>
       <br>
-      <form class="forms forms-inline input-field ">
-        <input type="text" class="input-big width-50" id="query" ng-model="query">
-        <label for="query">Filter</label>
-      </form>
+      <div>
+        <form class="forms forms-inline input-field ">
+          <input type="text" class="input-big width-50" id="query" ng-model="query">
+          <label for="query"style="margin-top:50px;">Filter</label>
+        </form>
+        
+      </div>
       <ul class="collection">
         <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="code in codeShares | filter:query">
           <a href="" ng-click="codeDetailsModal(code)" class="modal-trigger title"> {{code.title}}</a>
-          <div>
-            <button ng-repeat="tag in code.tags" class="btn waves-effect waves-light" style="transform: scale(.7,.7); background-color:#22A3EF">{{tag}}</button>
+          <div style="padding:5px;">
+          <label>Tagged</label>
+            <span ng-repeat="tag in code.tags" class="code-tag">{{tag}}</span>
           </div>
         </li>
       </ul>
@@ -32,7 +36,7 @@
           <br>
           <label>Tags</label>
           <div>
-            <button ng-repeat="tag in code.tags" class="btn waves-effect waves-light" style="transform: scale(.7,.7); background-color:#22A3EF">{{tag}}</button>
+            <span ng-repeat="tag in code.tags" class="code-tag">{{tag}}</span>
           </div>
           <br/>
           <label>Description</label> {{code.description}}
