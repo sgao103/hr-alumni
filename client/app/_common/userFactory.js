@@ -1,6 +1,6 @@
-angular.module('userFactory', ['ui.router'])
+angular.module('userFactory', ['ui.router', 'chat.factory'])
 
-.factory('User', function($http, $state) {
+.factory('User', function($http, $state, ChatFactory) {
 
   var details = {
     name: window.localStorage.getItem('hr-alum.user.name') || 'Anonymous',
@@ -21,6 +21,7 @@ angular.module('userFactory', ['ui.router'])
                     details.name = response.data.name;
                     window.localStorage.setItem('hr-alum.user.id', response.data._id);
                     window.localStorage.setItem('hr-alum.user.name', response.data.name);
+                    ChatFactory.openConnection();
                   }
                 });
   };
@@ -29,6 +30,7 @@ angular.module('userFactory', ['ui.router'])
     details.loggedIn = false;
     window.localStorage.removeItem('hr-alum.user.id');
     window.localStorage.removeItem('hr-alum.user.name');
+    ChatFactory.closeConnection();
     $state.go('app.login');
   };
 

@@ -51,6 +51,7 @@ module.exports = function(server) {
       }
       wss.broadcast(JSON.stringify({
         username: data.username,
+        userid: data.userid,
         text: data.text,
         p: false
       }));
@@ -58,8 +59,9 @@ module.exports = function(server) {
 
     //registers the websocket with it's associated username for easy lookup/differentiation
     register: function(data, ws) {
-      CLIENTS[data.username] = ws;
+      CLIENTS[data.userid] = ws;
       ws.USERNAME = data.username;
+      ws.USERID = data.userid;
       wss.broadcast(JSON.stringify({
         username: 'SYSTEM',
         text: ws.USERNAME + ' has joined.',
@@ -75,18 +77,20 @@ module.exports = function(server) {
         //send a message to the target client, with a private flag
         CLIENTS[data.to].send(JSON.stringify({
           username: data.username,
+          userid: data.userid,
           text: data.text,
           private: 'From'
         }));
         //also send a copy of the private message to the source client
-        CLIENTS[data.username].send(JSON.stringify({
-          username: data.to,
+        CLIENTS[data.userid].send(JSON.stringify({
+          username: CLIENTS[data.to].USERNAME,
           text: data.text,
+          userid: data.userid,
           private: 'To'
         }));
       } else {
         //invalid target client
-        CLIENTS[data.username].send(JSON.stringify({
+        CLIENTS[data.userid].send(JSON.stringify({
           username: 'SYSTEM',
           text: 'The user you are trying to reach does not exist or is not connected.',
           noreply: true
@@ -98,7 +102,7 @@ module.exports = function(server) {
   wss.on('connection', function(ws) {
 
     ws.on('close', function() {
-      delete CLIENTS[ws.USERNAME]; //when a websocket client is dropped, delete the reference from CLIENTS array
+      delete CLIENTS[ws.USERID]; //when a websocket client is dropped, delete the reference from CLIENTS array
       wss.broadcast(JSON.stringify({
         username: 'SYSTEM',
         text: ws.USERNAME + ' has left.',
