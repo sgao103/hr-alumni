@@ -4,8 +4,7 @@
   "description": "Team Lambos Greenfield Project",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js",
-    "postinstall": "bower install"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
