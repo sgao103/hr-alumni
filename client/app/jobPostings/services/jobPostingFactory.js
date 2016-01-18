@@ -42,11 +42,22 @@ angular.module('jobPosting.factory', [])
             });
     }
 
+    var postResume = function(resumePosted){
+        return $http.put(apiUrl + '/api/jobPostings/jobResume', resumePosted)
+            .then(function(res) {
+                return res.data;
+            }, function(err) {
+                return err;
+            });
+
+    };
+
 
     return{
         postJob : postJob,
         getJob : getJob,
-        specificJob : specificJob
+        specificJob : specificJob,
+        postResume : postResume
     }
 
 })

@@ -1,4 +1,5 @@
 angular.module('app', ['ui.router',
+    'ui.bootstrap',
     'app.home',
     'app.login',
     'app.profiles',
@@ -8,7 +9,8 @@ angular.module('app', ['ui.router',
     'jobPosting.factory',
     'jobPosting.jobPostingPost.controller',
     'jobPosting.jobPostingSearch.controller',
-    'jobPosting.jobPostingSpecific.controller'
+    'jobPosting.jobPostingSpecific.controller',
+    'jobPosting.jobPostingApply.controller'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -17,7 +19,7 @@ angular.module('app', ['ui.router',
     .state('home', {
       url:'/home',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/home/home.html',
           controller:  'HomeCtrl'
         }
@@ -26,7 +28,7 @@ angular.module('app', ['ui.router',
     .state('login', {
       url: '/login',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/login/login.html',
           controller:  'LoginCtrl'
         }
@@ -35,7 +37,7 @@ angular.module('app', ['ui.router',
     .state('profiles', {
       url: '/profiles',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/profiles/profiles.html', // plural
           controller:  'ProfilesCtrl'
         }
@@ -49,7 +51,7 @@ angular.module('app', ['ui.router',
     .state('updateProfile', {
       url: '/updateProfile/:githubName',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/updateProfile/updateProfile.html',
           controller:  'UpdateProfileCtrl'
         }
@@ -57,7 +59,7 @@ angular.module('app', ['ui.router',
     })
     .state('jobPostings', {
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/jobPostings/jobPosting/jobPostings.html',
         }
       }
@@ -80,6 +82,7 @@ angular.module('app', ['ui.router',
     })
     .state('jobPostings.SpecificJob',{
       params : {
+        id : null,
         jobTitle : null,
         description : null,
         company : null,
@@ -90,6 +93,14 @@ angular.module('app', ['ui.router',
         'jobPostings@jobPostings' : {
           templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
           controller : 'specificJobCtrl',
+        }
+      }
+    })
+    .state('jobPostings.Apply',{
+      views : {
+        'mainContent@' : {
+          templateUrl : 'app/jobPostings/jobPostingApply/jobPostingsApply.html',
+          controller : 'jobApplyCtrl'
         }
       }
     })

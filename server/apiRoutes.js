@@ -25,7 +25,8 @@ module.exports = function(apiRouter){
      */
     apiRouter.get('/jobPostings', jobPostingController.getJobPosting);
     apiRouter.post('/jobPostings', jobPostingController.createJobPosting);
-    apiRouter.get('/jobPostings/:specificJob',jobPostingController.specificJobPosting)
+    apiRouter.get('/jobPostings/:specificJob',jobPostingController.specificJobPosting);
+    apiRouter.put('/jobPostings/jobResume', jobPostingController.addResumeToJobPosting);
 
 
 }

@@ -6,6 +6,7 @@
     "angular": "~1.4.8",
     "angular-ui-router": "~0.2.15",
     "jquery": "~2.2.0",
-    "Materialize": "materialize#~0.97.5"
+    "Materialize": "materialize#~0.97.5",
+    "angular-ui-bootstrap": "~1.0.3"
   }
 }

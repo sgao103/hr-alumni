@@ -13,7 +13,6 @@ module.exports = {
 
     createJobPosting : function(req,res,next){
         var data = req.body
-        console.log(req.body)
         var jobPosting = {
             jobTitle : data.jobTitle,
             description : data.description,
@@ -56,7 +55,20 @@ module.exports = {
                 res.json(defaultJobPostingProps(dbResult))
             })
 
+    },
+
+    addResumeToJobPosting : function(req,res,next){
+        console.log(req.body)
+        var jobPostingID = req.body.jobId;
+        var resumeFile = req.body.resume;
+
+        JobPosting.findByIdAndUpdate(
+            jobPostingID,
+            {$push: {"resumes": resumeFile}},
+            {safe: true, upsert: true, new : true},
+            function(err, model) {
+                console.log(err);
+            }
+        );
     }
-
-
 }
