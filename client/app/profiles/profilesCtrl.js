@@ -4,20 +4,42 @@ angular.module('profiles.controller', ['ui.router'])
 
   HttpRequest.getProfiles().then(function (res) {
     $scope.profiles = res.data;
+    $scope.categories = $scope.getCategories();
   });
 
   $scope.filter = {};
 
+  $scope.categories = [];
+
   $scope.getCategories = function () {
-    return ($scope.profiles || []).map(function (prof) {
-      return prof.links.blog;
-    }).filter(function (prof, idx, arr) {
-      return arr.indexOf(prof) === idx;
-    });
+    // want the keys of the profile object
+    var categories = [];
+    var example = $scope.profiles[0] || {};
+    for (var key in example) {
+      if (key && example.hasOwnProperty(key) && typeof example[key] === 'object') {
+        for (var subKey in example[key]) {
+          categories.push(subKey);
+        }
+      }
+    }
+    return categories;
   };
 
   $scope.filterByCategory = function (person) {
-    return $scope.filter[person.category] || noFilter($scope.filter);
+    for (var key in person) {
+      if (key && person.hasOwnProperty(key) && typeof person[key] === 'object') {
+        for (var subKey in person[key]) {
+          if ($scope.filter[subKey]) {
+            // box is checked and value of object at that property is not null or ''
+            if (!person[key][subKey]) {
+              return false;
+            }
+          }
+        }
+      }
+    }
+
+    return true;
   };
 
   // $scope.filterByCategory = function (profile) {
