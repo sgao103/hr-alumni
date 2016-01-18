@@ -4,6 +4,7 @@
   "description": "Team Lambos Greenfield Project",
   "main": "server/server.js",
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server/server.js"
   },
   "repository": {
@@ -28,7 +29,7 @@
     "passport": "^0.3.2",
     "passport-github2": "^0.1.9",
     "ws": "^1.0.1",
-    "bower": "0.6.x"
+    "bower": "^1.6.5"
   },
   "engines": {
     "node": "5.2.0",
