@@ -6,8 +6,23 @@
             <form class="forms forms-inline input-field ">
                 <input type="text" class="input-big width-50" id="query" ng-model="query">
                 <label for="query">Filter</label>
-                <input type="checkbox" id="hireable" ng-model="filter.hireable">
-                <label for="hireable">Only Hireable</label>
+  <input type='checkbox' name='chek'>aldsfhg</input>
+
+                <div>
+                    <b>Filter by:</b>
+                    <div ng-repeat="cat in getCategories()">
+                        <b><input type="checkbox" ng-model="filter[cat]" /> +++ {{cat}}</b>
+                    </div>
+                    <hr />
+                    <div ng-repeat="prof in filtered=(profiles | filter:filterByCategory)">
+                        {{prof.contact.name}} ({{prof.category}})
+                    </div>
+                    <hr />
+                    {{filter}}
+                    Number of results: {{filtered.length}}
+                </div>
+
+
             </form>
             <ul class="collection">
                 <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter:query | filter:filterByCategory">

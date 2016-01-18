@@ -6,14 +6,24 @@ angular.module('profiles.controller', ['ui.router'])
     $scope.profiles = res.data;
   });
 
-  $scope.filter = {
-    hireable: false
+  $scope.filter = {};
+
+  $scope.getCategories = function () {
+    return ($scope.profiles || []).map(function (prof) {
+      return prof.links.blog;
+    }).filter(function (prof, idx, arr) {
+      return arr.indexOf(prof) === idx;
+    });
   };
 
-  $scope.filterByCategory = function (profile) {
-    // Display the person if the person's hireable checkbox is checked, or if there are no active filters
-    return $scope.filter[profile.hireable] || noFilter($scope.filter);
+  $scope.filterByCategory = function (person) {
+    return $scope.filter[person.category] || noFilter($scope.filter);
   };
+
+  // $scope.filterByCategory = function (profile) {
+  //   // Display the person if the person's hireable checkbox is checked, or if there are no active filters
+  //   return $scope.filter[profile.links.blog] || noFilter($scope.filter);
+  // };
   // where noFilter is a function that checks if there is any filter activated (and returns true if there is none):
 
   function noFilter(filterObj) {
