@@ -3,9 +3,7 @@ angular.module('httpFactory', [])
 .factory('HttpRequest', ['$http', '$q', function ($http, $q){
   var deferred= $q.defer();
   var submitProfile = function (isValid, data) {
-      console.log('Second isValid: ', isValid);
     if (isValid) {
-        console.log('data does it get here>=? ', data);
         return $http({
             method: 'POST',
             url: '/api/updateProfile',
@@ -19,7 +17,7 @@ angular.module('httpFactory', [])
   var getProfiles= function () {
     return $http({
       method: 'GET',
-      url: '/api/profiles'
+      url: '/api/users'
     }).success(function(result){
       deferred.resolve(result); 
     }).error(function (result){
@@ -30,7 +28,7 @@ angular.module('httpFactory', [])
   var getProfile= function (githubName){
     return $http({
       method: 'GET',
-      url: '/api/profile/'+githubName
+      url: '/api/users/'+githubName
     }).success(function(result){
       deferred.resolve(result);
     }).error(function (result){

@@ -33,17 +33,47 @@ angular.module('jobPosting.factory', [])
 
     };
 
-    var specificJob = function(jobID){
-        return $http.get(apiUrl + '/api/jobPostings/' + jobID)
+    //var specificJob = function(jobID){
+    //    return $http.get(apiUrl + '/api/jobPostings/' + jobID)
+    //        .then(function(res) {
+    //            return res.data;
+    //        }, function(err) {
+    //            return err;
+    //        });
+    //};
+
+    var postResume = function(resumePosted){
+        return $http.put(apiUrl + '/api/jobPostings/jobResume', resumePosted)
             .then(function(res) {
                 return res.data;
             }, function(err) {
                 return err;
             });
-    }
 
-    var postResume = function(resumePosted){
-        return $http.put(apiUrl + '/api/jobPostings/jobResume', resumePosted)
+    };
+
+    var appliedJobs = function(userID){
+
+        return $http.get(apiUrl + '/api/jobPostings/appliedJobs', {
+            params : {
+                userID : userID
+            }
+        })
+            .then(function(res) {
+                return res.data;
+            }, function(err) {
+                return err;
+            });
+
+    };
+
+    var postedJobs = function(userID){
+
+        return $http.get(apiUrl + '/api/jobPostings/postedJobs', {
+            params : {
+                userID : userID
+            }
+        })
             .then(function(res) {
                 return res.data;
             }, function(err) {
@@ -56,8 +86,10 @@ angular.module('jobPosting.factory', [])
     return{
         postJob : postJob,
         getJob : getJob,
-        specificJob : specificJob,
-        postResume : postResume
+        //specificJob : specificJob,
+        postResume : postResume,
+        appliedJobs : appliedJobs,
+        postedJobs : postedJobs
     }
 
 })

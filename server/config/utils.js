@@ -9,6 +9,7 @@ var defaultJobPostingProperties = function(dbResults) {
     var defaultProps = {
       _id : 'id',
       jobTitle : 'jobTitle',
+      resumes : 'resumes',
       description : 'description',
       company : 'company',
       experience : 'experience',

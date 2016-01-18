@@ -4,6 +4,8 @@
 var mongoose = require('mongoose');
 
 var JobPostingSchema = new mongoose.Schema({
+    postedBy : {type : String},
+    appliedBy : {type : Array},
     jobTitle : {type : String},
     description : {type : String},
     company : {type : String},
@@ -11,6 +13,6 @@ var JobPostingSchema = new mongoose.Schema({
     companyLinkedIn :{type : String},
     resumes : {type : Array},
     postedDate : {type : Date, default : Date.now}
-})
+});
 
-module.exports = mongoose.model('JobPosting',JobPostingSchema)
+module.exports = mongoose.model('JobPosting',JobPostingSchema);

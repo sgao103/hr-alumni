@@ -24,9 +24,15 @@ angular.module('jobPosting.jobPostingApply.controller', ['ui.router'])
     }
 
     $scope.submitResume = function(){
-        jobPostingFactory.postResume({jobId : items, resume : resumeBase64});
-        $uibModalInstance.close()
-        $state.go('jobPostings');
+        var submitObject = {
+            jobId : items,
+            resume : resumeBase64,
+            appliedBy :  window.localStorage.getItem('hr-alum.user.id')
+        };
+
+        jobPostingFactory.postResume(submitObject);
+        $uibModalInstance.close();
+        $state.go('app.jobPostings');
     }
 
 }]);
