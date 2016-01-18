@@ -4,6 +4,7 @@
   "description": "Team Lambos Greenfield Project",
   "main": "server/server.js",
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server/server.js"
   },
   "repository": {
