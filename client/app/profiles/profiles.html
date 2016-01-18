@@ -8,19 +8,28 @@
                 <label for="query">Filter</label>
 
                 <div>
-                    <b>Filter by:</b>
-                    <div ng-repeat="cat in categories">
-                        <input type="checkbox" id="check-{{cat}}" ng-model="filter[cat]" />
-                        <label for="check-{{cat}}">{{cat}}</label>
+                    <input type="checkbox" id="check-status" ng-model="filter.status" />
+                    <label for="check-status">Only Hireable</label>
 
+                    <div>
+                        Provides info:
+
+                        <input type="checkbox" id="check-blog" ng-model="filter.blog" />
+                        <label for="check-blog">Blog</label>
+
+                        <input type="checkbox" id="check-project1" ng-model="filter.project1" />
+                        <label for="check-project1">Greenfield</label>
+
+                        <input type="checkbox" id="check-project2" ng-model="filter.project2" />
+                        <label for="check-project2">Legacy</label>
+
+                        <input type="checkbox" id="check-project3" ng-model="filter.project3" />
+                        <label for="check-project3">Thesis</label>
                     </div>
-                    <hr />
+
                     <div ng-repeat="prof in filtered=(profiles | filter:filterByCategory)">
-                        {{prof.contact.name}} ({{prof.category}})
+                        Number of results: {{filtered.length}}
                     </div>
-                    <hr />
-                    {{filter}}
-                    Number of results: {{filtered.length}}
                 </div>
 
 
