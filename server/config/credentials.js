@@ -4,8 +4,8 @@
 
 module.exports = {
 
-    GITHUB_CLIENT_ID : "399d03e217b75d4f4625",
-    GITHUB_CLIENT_SECRET : "8e4dcd1a7c66f1db0c438aa50aa3c4af8aa4d2d5",
+    GITHUB_CLIENT_ID : "da6a9c9e5ea0d8db5146",
+    GITHUB_CLIENT_SECRET : "c6871058cf84f2ccdc86436e3e45a66a42f3ad95",
     GITHUB_CALLBACK_URL: "http://teslalegacy.herokuapp.com/auth/github/callback"
 
 };
