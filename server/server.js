@@ -9,8 +9,8 @@ var http = require('http');
 //github Authentication
 require('./config/passportAuth.js')(app);
 
-// mongoose.connect(process.env.MONGOLAB_URI);
-mongoose.connect("mongodb://localhost/hralumnimark2");
+mongoose.connect(process.env.MONGOLAB_URI);
+//mongoose.connect("mongodb://localhost/hralumnimark2");
 
 
 require('./middleware.js')(app,express)
