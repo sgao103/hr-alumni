@@ -1,0 +1,56 @@
+#chatContainer {
+  width: 800px;
+  height: 280px;
+  margin: 0 auto;
+}
+
+#chatWindow {
+  font-size: 16px;
+  width: 800px;
+  height: 250px;
+  border: 2px solid #26A69A;
+  border-radius: 2px;
+  overflow: auto;
+  background-color: white;
+}
+
+#chatContainer input {
+  width: 90%;
+  font-size: 20px;
+}
+
+#chatContainer button {
+  font-size: 20px;
+  padding: 1px;
+  margin-left: 15px;
+  border: 2px solid #9E9E9E;
+  background-color: white;
+}
+
+#chatContainer button:hover {
+  border: 2px solid #26A69A;
+  color: #26A69A;
+}
+
+#chatWindow p {
+  margin: 0px;
+  padding: 5px;
+  line-height: 100%;
+}
+
+#chatWindow .user {
+  font-weight: bold;
+}
+
+#chatWindow .text {
+
+}
+
+#chatWindow .private {
+  font-style: oblique;
+}
+
+#chatWindow .sys {
+  font-weight: bold;
+  color: red;
+}

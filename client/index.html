@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="lib/Materialize/dist/css/materialize.min.css" type="text/css" media="screen,projection"/>
     <link rel="stylesheet" href="css/style.css" type="text/css" media="screen,projection"/>
+    <link rel="stylesheet" href="css/chat.css" type="text/css" media="screen,projection"/>
   </head>
 
   <body ng-app="app">
@@ -21,18 +22,22 @@
       <div ui-view="mainContent"></div>
     </div>
 
+    <div ui-view="chat"></div>
+
     <!-- Libraries -->
     <script src="lib/angular/angular.js"></script>
     <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="lib/jquery/dist/jquery.min.js"></script> <!--Import jQuery before materialize.js-->
     <script src="lib/Materialize/dist/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.0.3/ui-bootstrap-tpls.min.js"></script>
+    <script src="lib/angular-scroll-glue/src/scrollglue.js"></script>
 
     <!-- Factories/Services -->
     <script src="app/jobPostings/services/jobPostingFactory.js" ></script>
     <script src="app/_common/httpFactory.js"></script>
     <script src="app/_common/profileFactory.js"></script>
     <script src="app/_common/userFactory.js"></script>
+    <script src="app/chat/chatFactory.js"></script>
 
     <!-- Controllers -->
     <script src="app/appCtrl.js"></script>
@@ -49,6 +54,7 @@
     <script src="app/jobPostings/jobPostingPostedJob/jobPostingPostedJobCtrl.js"></script>
 
     <script src="app/app.js"></script>
+    <script src="app/chat/chatCtrl.js"></script>
     <script src="init.js"></script>
 
   </body>
