@@ -6,31 +6,24 @@ angular.module('profiles.controller', ['ui.router'])
     $scope.profiles = res.data;
   });
 
-  $scope.hireable = {};
-
-  $scope.hireableFilter = function () {
-    if (this.hireable.checked) {
-      console.log('box is checked');
-      console.log(this.profiles.filter(function(eachProfile){
-        return eachProfile.about.status && eachProfile.about.status !== '';
-      }), 'all profiles? this.profile.about.status');
-      console.log(this.profiles.filter(function(eachProfile){
-        return eachProfile.links.blog && eachProfile.links.blog !== '';
-      }), 'filter for blog first');
-      return this.profiles.filter(function(eachProfile){
-        return eachProfile.about.status && eachProfile.about.status !== '';
-      });
-    }
-    else {
-      console.log('box is empty');
-      console.log(this.profiles[0].about.status, 'this.profiles.about.status');
-    }
+  $scope.filter = {
+    hireable: false
   };
 
-  // | filter:hireableFilter <tr ng-repeat="player in players | filter:{id: player_id, name:player_name} | filter:ageFilter">
+  $scope.filterByCategory = function (profile) {
+    // Display the person if the person's hireable checkbox is checked, or if there are no active filters
+    return $scope.filter[profile.hireable] || noFilter($scope.filter);
+  };
+  // where noFilter is a function that checks if there is any filter activated (and returns true if there is none):
 
-  $scope.ageFilter = function (player) {
-      return (player.age > $scope.min_age && player.age < $scope.max_age);
+  function noFilter(filterObj) {
+    for (var key in filterObj) {
+      if (filterObj[key]) {
+        // There is at least one checkbox checked
+        return false;
+      }
+    }
+    return true;
   }
 
   // used for showing the modal in profiles.html
