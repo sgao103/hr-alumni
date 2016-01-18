@@ -14,7 +14,7 @@ angular.module('userFactory', ['ui.router'])
   };
 
   var login = function(userID) {
-    return $http.post(apiUrl + '/api/users/login', {_id: userID})
+    return $http.post( '/api/users/login', {_id: userID})
                 .then(function(response){
                   if (response.data._id !== undefined) {
                     details.loggedIn = true;
