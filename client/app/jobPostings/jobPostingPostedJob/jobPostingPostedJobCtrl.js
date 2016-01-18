@@ -1,4 +1,4 @@
-angular.module('jobPosting.jobPostingPostedJob.controller', ['ui.router'])
+angular.module('jobPosting.jobPostingPostedJob.controller', ['ui.router','ngSanitize'])
 
 .controller('postedJobCtrl',['$scope','$http','jobPostingFactory','$state',function($scope,$http,jobPostingFactory,$state){
 
@@ -6,6 +6,10 @@ angular.module('jobPosting.jobPostingPostedJob.controller', ['ui.router'])
         .then(function(data){
             $scope.appliedJobs = data;
         });
+
+    $scope.showResumes = function(job){
+        $scope.allResumes = job.resumes;
+    };
 
     $scope.downloadResumes = function(job){
         job.resumes.forEach(function(eachResume){

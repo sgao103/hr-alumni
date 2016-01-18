@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 });
 
 var server = http.createServer(app);
-server.listen(port, function() {
+server.listen(process.env.PORT || 5000, function() {
   console.log('Server started on port: ' + port);
   //mounts a websocket server on the HTTP server
   require('./ws_server.js')(server);
