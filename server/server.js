@@ -4,6 +4,7 @@ var app = express();
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var session = require('express-session');
+var http = require('http');
 
 //github Authentication
 require('./config/passportAuth.js')(app);
@@ -24,6 +25,9 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
-app.listen(port, function() {
+var server = http.createServer(app);
+server.listen(port, function() {
   console.log('Server started on port: ' + port);
+  //mounts a websocket server on the HTTP server
+  require('./ws_server.js')(server);
 });

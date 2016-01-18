@@ -1,36 +1,37 @@
 angular.module('app', ['ui.router',
-    'app.controller',
-    'home.controller',
-    'login.controller',
-    'auth.controller',
-    'profiles.controller',
-    'updateProfile.controller',
-    'jobPosting.factory',
-    'jobPosting.jobPostingPost.controller',
-    'jobPosting.jobPostingSearch.controller',
-    'jobPosting.jobPostingSpecific.controller',
-    'userFactory',
-    'profileFactory',
-    'httpFactory'
+  'app.controller',
+  'home.controller',
+  'login.controller',
+  'auth.controller',
+  'profiles.controller',
+  'updateProfile.controller',
+  'userFactory',
+  'profileFactory',
+  'httpFactory',
+  //Job Posting
+  'jobPosting.factory',
+  'jobPosting.jobPostingPost.controller',
+  'jobPosting.jobPostingSearch.controller',
+  'jobPosting.jobPostingSpecific.controller',
+  //Chat
+  'chat.controller',
+  'chat.factory'
 ])
 
 .run(function($rootScope, User, $state) {
   // Attempt to log the user in if there is an
   var userID = window.localStorage.getItem('hr-alum.user.id');
-  if ( userID ) User.login(userID);
-
+  if (userID) User.login(userID);
   // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if (!User.loggedIn() && toState.name !== 'app.login'   
-                         && toState.name !== 'app.auth'
-                         && toState.name !== 'app.home') {
+    if (!User.loggedIn() && toState.name !== 'app.login' && toState.name !== 'app.auth' && toState.name !== 'app.home') {
       event.preventDefault();
       $state.go('app.home');
     }
   })
 })
 
-.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/home');
   $stateProvider
     .state('app', {
@@ -38,20 +39,24 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent': {
           templateUrl: 'app/home/home.html',
-          controller:  'AppCtrl'
+          controller: 'AppCtrl'
         },
-        'header' :{
+        'header': {
           templateUrl: 'app/_partials/nav.html',
-          controller:   'AppCtrl'
+          controller: 'AppCtrl'
+        },
+        'chat': {
+          templateUrl: 'app/chat/chat.html',
+          controller: 'ChatCtrl'
         }
       }
     })
     .state('app.home', {
-      url:'home',
+      url: 'home',
       views: {
         'mainContent@': {
           templateUrl: 'app/home/home.html',
-          controller:  'HomeCtrl'
+          controller: 'HomeCtrl'
         }
       }
     })
@@ -60,25 +65,25 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent@': {
           templateUrl: 'app/login/login.html',
-          controller:  'LoginCtrl'
+          controller: 'LoginCtrl'
         }
       }
     })
-    .state('app.auth', { 
-      url: 'auth/:userID',  // Server routes back here after authenticating with GitHub
+    .state('app.auth', {
+      url: 'auth/:userID', // Server routes back here after authenticating with GitHub
       views: {
         'mainContent@': {
           templateUrl: 'app/login/login.html',
-          controller:  'AuthCtrl'
+          controller: 'AuthCtrl'
         }
       }
-    })    
+    })
     .state('app.profiles', {
       url: 'profiles',
       views: {
         'mainContent@': {
           templateUrl: 'app/profiles/profiles.html',
-          controller:  'ProfilesCtrl'
+          controller: 'ProfilesCtrl'
         }
       }
     })
@@ -87,10 +92,10 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent@': {
           templateUrl: 'app/updateProfile/updateProfile.html',
-          controller:  'UpdateProfileCtrl'
+          controller: 'UpdateProfileCtrl'
         }
       }
-    })    
+    })
     .state('app.jobPostings', {
       views: {
         'mainContent@': {
@@ -99,33 +104,33 @@ angular.module('app', ['ui.router',
       }
     })
     .state('app.jobPostings.Search', {
-      views : {
-        'jobPostings@app.jobPostings' : {
+      views: {
+        'jobPostings@app.jobPostings': {
           templateUrl: 'app/jobPostings/jobPostingSearch/jobPostingsSearch.html',
-          controller : 'jobSearchingCtrl'
+          controller: 'jobSearchingCtrl'
         }
       }
     })
     .state('app.jobPostings.Post', {
-      views : {
-        'jobPostings@app.jobPostings' : {
+      views: {
+        'jobPostings@app.jobPostings': {
           templateUrl: 'app/jobPostings/jobPostingPost/jobPostingsPost.html',
-          controller : 'jobPostingCtrl'
+          controller: 'jobPostingCtrl'
         }
       }
     })
-    .state('app.jobPostings.SpecificJob',{
-      params : {
-        jobTitle : null,
-        description : null,
-        company : null,
-        experience : null,
-        companyLinkedIn : null
+    .state('app.jobPostings.SpecificJob', {
+      params: {
+        jobTitle: null,
+        description: null,
+        company: null,
+        experience: null,
+        companyLinkedIn: null
       },
-      views : {
-        'jobPostings@app.jobPostings' : {
+      views: {
+        'jobPostings@app.jobPostings': {
           templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
-          controller : 'specificJobCtrl',
+          controller: 'specificJobCtrl',
         }
       }
     })
