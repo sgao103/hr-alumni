@@ -33,10 +33,10 @@ angular.module('userFactory', ['ui.router', 'chat.factory'])
     details.loggedIn = false;
     window.localStorage.removeItem('hr-alum.user.id');
     window.localStorage.removeItem('hr-alum.user.name');
-    window.localStorage.setItem('hr-alum.user.githubName');
+    window.localStorage.removeItem('hr-alum.user.githubName');
 
     ChatFactory.closeConnection();
-    
+  
     $state.go('app.login');
   };
 

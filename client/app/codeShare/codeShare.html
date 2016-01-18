@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="s12 col">
+
+      <h3>CodeShare</h3>
+      <a href="" ng-click="createCodeShare()" class="modal-trigger title">Create a new CodeShare</a>
+      <br>
+      <form class="forms forms-inline input-field ">
+        <input type="text" class="input-big width-50" id="query" ng-model="query">
+        <label for="query">Filter</label>
+      </form>
+      <ul class="collection">
+        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="code in codeShares | filter:query">
+          <a href="" ng-click="codeDetailsModal(code)" class="modal-trigger title"> {{code.title}}</a>
+          <div>
+            <button ng-repeat="tag in code.tags" class="btn waves-effect waves-light" style="transform: scale(.7,.7); background-color:#22A3EF">{{tag}}</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="codeDetailsModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="row">
+        <div class="l2 col">
+        </div>
+        <div class="l10 col">
+          <img style="margin: 10px" height="150px" width="auto" ng-src="{{code.createdBy.contact.profilePic}}" alt="" class="align-center circle">
+          <h3>{{code.title}}</h3>
+          <label>Created By: </label> {{code.createdBy.contact.name}}
+          <br>
+          <label>Tags</label>
+          <div>
+            <button ng-repeat="tag in code.tags" class="btn waves-effect waves-light" style="transform: scale(.7,.7); background-color:#22A3EF">{{tag}}</button>
+          </div>
+          <br/>
+          <label>Description</label> {{code.description}}
+          <br/>
+          <label>Code</label> <pre>{{code.code}}</pre>
+          <br/>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"><a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a></div>
+  </div>
+</div>

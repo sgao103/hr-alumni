@@ -8,6 +8,7 @@ module.exports = {
 
     var newCodeShare = {
       title: data.title,
+      createdBy: data.createdBy, // userID
       description: data.description,
       tags: data.tags,
       code: data.code
@@ -28,7 +29,9 @@ module.exports = {
     var resultLimit = Number(req.query.resultLimit) || 10;
 
     CodeShare.find({})
+      .populate('createdBy')
       .limit(resultLimit)
+      .sort({postedDate:-1}) // newest first
       .then(function(dbResults) {
         res.json( dbResults );
       })

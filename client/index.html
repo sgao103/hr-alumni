@@ -22,15 +22,17 @@
         <a id="logo-container" href="#" class="brand-logo" ui-sref="app.home">HR Alumni</a>
 
         <ul class="right hide-on-med-and-down">
-          <li><a ng-show="loggedIn()" ui-sref="app.profiles">Profiles</a></li>
+          <li><a ng-show="loggedIn()" ui-sref="app.profiles">Classmates</a></li>
           <li><a ng-show="loggedIn()" ui-sref="app.jobPostings">Job Postings</a></li>
+          <li><a ng-show="loggedIn()" ui-sref="app.codeShare">Code Share</a></li>
           <li><a ng-show="!loggedIn()" ui-sref="app.login">Login</a></li>
           <li><a ng-show="loggedIn()" ng-click="logout()">Hi, {{user.name}} (Logout)</a></li>
         </ul>
 
         <ul id="slide-out" class="side-nav">
-          <li><a ng-show="loggedIn()" ui-sref="app.profiles">Profiles</a></li>
+          <li><a ng-show="loggedIn()" ui-sref="app.profiles">Classmates</a></li>
           <li><a ng-show="loggedIn()" ui-sref="app.jobPostings">Job Postings</a></li>
+          <li><a ng-show="loggedIn()" ui-sref="app.codeShare">Code Share</a></li>
           <li><a ng-show="!loggedIn()" ui-sref="app.login">Login</a></li>
           <li><a ng-show="loggedIn()" ng-click="logout()">Logout</a></li>
         </ul>
@@ -61,6 +63,8 @@
     <script src="app/_common/profileFactory.js"></script>
     <script src="app/_common/userFactory.js"></script>
     <script src="app/chat/chatFactory.js"></script>
+    <script src="app/codeShare/codeShareFactory.js"></script>
+
 
     <!-- Controllers -->
     <script src="app/appCtrl.js"></script>
@@ -69,6 +73,7 @@
     <script src="app/auth/authCtrl.js"></script>
     <script src="app/profiles/profilesCtrl.js"></script>
     <script src="app/updateProfile/updateProfileCtrl.js"></script>
+    <script src="app/codeShare/codeShareCtrl.js"></script>
     <script src="app/jobPostings/jobPostingPost/jobPostingPostCtrl.js"></script>
     <script src="app/jobPostings/jobPostingSearch/jobPostingSearchCtrl.js"></script>
     <script src="app/jobPostings/jobPostingSpecific/jobPostingSpecificCtrl.js"></script>

@@ -119,6 +119,15 @@ angular.module('app', ['ui.router',
           controller:  'CodeShareCtrl'
         }
       }
+    })
+    .state('app.codeShare.create', {
+      url: '/create',
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/codeShare/codeShareCreate.html',
+          controller:  'CodeShareCtrl'
+        }
+      }
     })      
     .state('app.jobPostings', {
       views: {
