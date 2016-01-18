@@ -1,7 +1,7 @@
-<div ng-if="visible" id="chatContainer">
+<div ng-show="visible()" id="chatContainer">
   <div id="chatWindow" scroll-glue>
     <p ng-class="{private: message.private, sys: (message.username==='SYSTEM')}" ng-repeat="message in messages">{{message.private}}
-      <span class="user" ng-style="{'color':'{{nameToColor(message.username)}}'}" ng-click="sendPrivateMessage(message.username, message.noreply)">{{message.username}}: </span>
+      <span class="user" ng-style="{'color':'{{nameToColor(message.username)}}'}" ng-click="sendPrivateMessage(message)">{{message.username}}: </span>
       <span class="text">{{message.text}}</span>
     </p>
   </div>
