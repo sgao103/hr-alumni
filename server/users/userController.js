@@ -10,7 +10,7 @@ exports.login = function (req, res) {
     User.findOne({ _id: userID  })
       .then(function(user){
         if (!user) res.sendStatus(401); // unauthorized: invalid credentials
-        else res.status(200).json( {_id: user._id, name: user.contact.name} ); // login successful
+        else res.status(200).json( {_id: user._id, name: user.contact.name, githubName: user.contact.githubName} ); // login successful
       })
       .catch(function(err){
         throw err;
