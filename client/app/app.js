@@ -29,8 +29,9 @@ angular.module('app', ['ui.router',
   if (userID) User.login(userID);
   // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
-    if (!User.loggedIn() && toState.name !== 'app.login' && toState.name !== 'app.auth' && toState.name !== 'app.home') {
+    if (!User.loggedIn() && toState.name !== 'app.login'
+                         && toState.name !== 'app.auth'
+                         && toState.name !== 'app.home') {
       event.preventDefault();
       $state.go('app.home');
     }
@@ -45,10 +46,6 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent@': {
           templateUrl: 'app/home/home.html',
-          controller: 'AppCtrl'
-        },
-        'header': {
-          templateUrl: 'app/_partials/nav.html',
           controller: 'AppCtrl'
         },
         'chat': {
