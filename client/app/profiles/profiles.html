@@ -11,31 +11,35 @@
                     <input type="checkbox" id="check-status" ng-model="filter.status" />
                     <label for="check-status">Only Hireable</label>
 
-                    <div>
-                        Provides info:
 
-                        <input type="checkbox" id="check-blog" ng-model="filter.blog" />
-                        <label for="check-blog">Blog</label>
+                    <div class="row">
+                      <div class="col s12">
+                        <div class="row card-panel">
+                          <h6>Provides info:</h6>
+                            <input type="checkbox" id="check-languages" ng-model="filter.languages" />
+                            <label for="check-languages">Languages</label>
 
-                        <input type="checkbox" id="check-project1" ng-model="filter.project1" />
-                        <label for="check-project1">Greenfield</label>
+                            <input type="checkbox" id="check-location" ng-model="filter.location" />
+                            <label for="check-location">Location</label>
 
-                        <input type="checkbox" id="check-project2" ng-model="filter.project2" />
-                        <label for="check-project2">Legacy</label>
+                            <input type="checkbox" id="check-blog" ng-model="filter.blog" />
+                            <label for="check-blog">Blog</label>
+                            <input type="checkbox" id="check-project1" ng-model="filter.project1" />
+                            <label for="check-project1">Greenfield</label>
 
-                        <input type="checkbox" id="check-project3" ng-model="filter.project3" />
-                        <label for="check-project3">Thesis</label>
-                    </div>
+                            <input type="checkbox" id="check-project2" ng-model="filter.project2" />
+                            <label for="check-project2">Legacy</label>
 
-                    <div ng-repeat="prof in filtered=(profiles | filter:filterByCategory)">
-                        Number of results: {{filtered.length}}
+                            <input type="checkbox" id="check-project3" ng-model="filter.project3" />
+                            <label for="check-project3">Thesis</label>
+                        </div>
+                      </div>
                     </div>
                 </div>
-
-
             </form>
-            <ul class="collection">
-                <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in profiles | filter:query | filter:filterByCategory">
+            <ul class="collection with-header">
+                <li class="collection-header"><h5>Number of results: {{filtered.length}}</h5></li>
+                <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="profile in filtered=(profiles | filter:query | filter:filterByCategory)">
                     <a href="" ng-click="modalDetails(profile)" class="modal-trigger title"><img ng-src="{{profile.contact.profilePic}}" alt="" class="circle"> {{profile.contact.name}}</a>
                     <p>{{profile.contact.location}}</p>
                 </li>

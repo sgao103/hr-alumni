@@ -30,7 +30,7 @@ angular.module('profiles.controller', ['ui.router'])
       if (key && person.hasOwnProperty(key) && typeof person[key] === 'object') {
         for (var subKey in person[key]) {
           if ($scope.filter[subKey]) {
-            // box is checked and value of object at that property is not null or ''
+            // box is checked and value of that profile object at that property of $scope.filter is not null or ''
             if (!person[key][subKey]) {
               return false;
             }
@@ -41,22 +41,6 @@ angular.module('profiles.controller', ['ui.router'])
 
     return true;
   };
-
-  // $scope.filterByCategory = function (profile) {
-  //   // Display the person if the person's hireable checkbox is checked, or if there are no active filters
-  //   return $scope.filter[profile.links.blog] || noFilter($scope.filter);
-  // };
-  // where noFilter is a function that checks if there is any filter activated (and returns true if there is none):
-
-  function noFilter(filterObj) {
-    for (var key in filterObj) {
-      if (filterObj[key]) {
-        // There is at least one checkbox checked
-        return false;
-      }
-    }
-    return true;
-  }
 
   // used for showing the modal in profiles.html
   $scope.modalDetails = function(profile){
