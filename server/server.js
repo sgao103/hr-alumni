@@ -1,6 +1,6 @@
-var port = process.env.PORT || 3000;
 var express = require('express');
 var app = express();
+var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var session = require('express-session');
@@ -26,7 +26,7 @@ app.get('/', function(req, res) {
 });
 
 var server = http.createServer(app);
-server.listen(process.env.PORT || 5000, function() {
+server.listen(port, function() {
   console.log('Server started on port: ' + port);
   //mounts a websocket server on the HTTP server
   require('./ws_server.js')(server);
