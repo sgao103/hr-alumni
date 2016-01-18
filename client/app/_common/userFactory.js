@@ -2,12 +2,12 @@ angular.module('userFactory', ['ui.router'])
 
 .factory('User', function($http, $state) {
 
-  var details = { 
+  var details = {
     name: window.localStorage.getItem('hr-alum.user.name') || 'Anonymous',
     loggedIn: false
   };
 
-  var apiUrl = 'http://localhost:3000';
+  var apiUrl = 'http://teslalegacy.herokuapp.com';
 
   var loggedIn = function() {
     return details.loggedIn;

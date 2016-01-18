@@ -4,7 +4,7 @@ angular.module('jobPosting.factory', [])
 
 .factory('jobPostingFactory',function($http){
 
-    var apiUrl = 'http://localhost:3000';
+    var apiUrl = 'http://teslalegacy.herokuapp.com';
 
     var postJob = function(jobPosting){
 
