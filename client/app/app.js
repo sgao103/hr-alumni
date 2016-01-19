@@ -1,30 +1,48 @@
 angular.module('app', ['ui.router',
-  'app.controller',
-  'home.controller',
-  'login.controller',
-  'auth.controller',
-  'profiles.controller',
-  'updateProfile.controller',
-  'userFactory',
-  'profileFactory',
-  'httpFactory',
-  //Job Posting
-  'jobPosting.factory',
-  'jobPosting.jobPostingPost.controller',
-  'jobPosting.jobPostingSearch.controller',
-  'jobPosting.jobPostingSpecific.controller',
-  //Chat
-  'chat.controller',
-  'chat.factory'
+    'ui.bootstrap',
+    'app.controller',
+    'home.controller',
+    'login.controller',
+    'auth.controller',
+    'profiles.controller',
+    'updateProfile.controller',
+    'userFactory',
+    'profileFactory',
+    'httpFactory',
+    //Job Posting
+    'jobPosting.factory',
+    'jobPosting.jobPostingPost.controller',
+    'jobPosting.jobPostingSearch.controller',
+    'jobPosting.jobPostingSpecific.controller',
+    'jobPosting.jobPostingApply.controller',
+    'jobPosting.jobPostingPostedJob.controller',
+    'jobPosting.jobPostingAppliedJob.controller',
+    //Chat
+    'chat.controller',
+    'chat.factory',
+    //CodeShare
+    'codeShare.controller',
+    'codeShare.factory',
+
 ])
 
 .run(function($rootScope, User, $state) {
   // Attempt to log the user in if there is an
   var userID = window.localStorage.getItem('hr-alum.user.id');
   if (userID) User.login(userID);
-  // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
+
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if (!User.loggedIn() && toState.name !== 'app.login' && toState.name !== 'app.auth' && toState.name !== 'app.home') {
+    var githubName = window.localStorage.getItem('hr-alum.user.githubName');
+
+    // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
+    if (!User.loggedIn() && toState.name !== 'app.login'
+                         && toState.name !== 'app.auth'
+                         && toState.name !== 'app.home') {
+      event.preventDefault();
+      $state.go('app.home');
+
+    // Prevent logged in users from being able to access and update other user's updateProfile section
+    } else if ( toState.name === 'app.updateProfile' && toParams.githubName !== githubName) {
       event.preventDefault();
       $state.go('app.home');
     }
@@ -37,12 +55,8 @@ angular.module('app', ['ui.router',
     .state('app', {
       url: '/',
       views: {
-        'mainContent': {
+        'mainContent@': {
           templateUrl: 'app/home/home.html',
-          controller: 'AppCtrl'
-        },
-        'header': {
-          templateUrl: 'app/_partials/nav.html',
           controller: 'AppCtrl'
         },
         'chat': {
@@ -70,7 +84,8 @@ angular.module('app', ['ui.router',
       }
     })
     .state('app.auth', {
-      url: 'auth/:userID', // Server routes back here after authenticating with GitHub
+      url: 'auth/:userID',  // Server routes back here after authenticating with GitHub
+
       views: {
         'mainContent@': {
           templateUrl: 'app/login/login.html',
@@ -96,6 +111,24 @@ angular.module('app', ['ui.router',
         }
       }
     })
+    .state('app.codeShare', {
+      url: 'codeShare',
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/codeShare/codeShare.html',
+          controller:  'CodeShareCtrl'
+        }
+      }
+    })
+    .state('app.codeShare.create', {
+      url: '/create',
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/codeShare/codeShareCreate.html',
+          controller:  'CodeShareCtrl'
+        }
+      }
+    })      
     .state('app.jobPostings', {
       views: {
         'mainContent@': {
@@ -119,18 +152,44 @@ angular.module('app', ['ui.router',
         }
       }
     })
-    .state('app.jobPostings.SpecificJob', {
-      params: {
-        jobTitle: null,
-        description: null,
-        company: null,
-        experience: null,
-        companyLinkedIn: null
+    .state('app.jobPostings.SpecificJob',{
+      params : {
+        id : null,
+        jobTitle : null,
+        description : null,
+        company : null,
+        experience : null,
+        companyLinkedIn : null
+
       },
       views: {
         'jobPostings@app.jobPostings': {
           templateUrl: 'app/jobPostings/jobPostingSpecific/jobPostingsSpecific.html',
           controller: 'specificJobCtrl',
+        }
+      }
+    })
+    .state('jobPostings.Apply',{
+      views : {
+        'mainContent@' : {
+          templateUrl : 'app/jobPostings/jobPostingApply/jobPostingsApply.html',
+          controller : 'jobApplyCtrl'
+        }
+      }
+    })
+    .state('app.jobPostings.appliedJobs',{
+      views : {
+        'mainContent@' : {
+          templateUrl : 'app/jobPostings/jobPostingAppliedJob/jobPostingAppliedJobs.html',
+          controller : 'appliedJobCtrl'
+        }
+      }
+    })
+    .state('app.jobPostings.postedJobs',{
+      views : {
+        'mainContent@' : {
+          templateUrl : 'app/jobPostings/jobPostingPostedJob/jobPostingPostedJobs.html',
+          controller : 'postedJobCtrl'
         }
       }
     })

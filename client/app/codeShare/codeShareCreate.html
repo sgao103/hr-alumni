@@ -1,0 +1,46 @@
+<div class='container-fluid' style="margin:70px">
+  <div class="row">
+
+
+
+      <div class="row">
+
+        <div class="input-field col s6">
+          <input id="title" type="text" class="validate" placeholder="Title" aria-describedby="basic-addon1" ng-model="newCodeShare.title" required>
+          <label class="active" for="title">Title</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="description" type="text" class="validate" placeholder="Description" aria-describedby="basic-addon1" ng-model="newCodeShare.description" required>
+          <label class="active" for="description">Description</label>
+        </div>
+
+
+        <div class="input-field col s12">
+          <input id="code" type="text" class="validate" placeholder="Code" aria-describedby="basic-addon1" ng-model="newCodeShare.code" required>
+          <label class="active" for="code">Code</label>
+        </div>
+
+        <div class="input-field col s6">
+          <input id="tag" type="text" class="validate" placeholder="Tag" aria-describedby="basic-addon1" ng-model="tag" required>
+          <label class="active" for="tag">Tag</label>
+        </div>
+
+        <div class="input-field col s6">
+          <button ng-click="addTag()" class="btn waves-effect waves-light">Add Tag</button>
+        </div>
+
+
+        <div class="col s12">
+          <span ng-repeat="tag in newCodeShare.tags">
+            <button ng-click="removeTag(tag)" class="btn waves-effect waves-light" style="margin:10px; background-color:#22A3EF">{{tag}}</button>
+          </span>
+        </div>
+
+      </div>
+        <button class="btn waves-effect waves-light col s12" ng-click="submitCodeShare()" >Submit CodeShare</button>
+
+  </div>
+</div>
+
+

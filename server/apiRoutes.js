@@ -3,6 +3,7 @@
  */
 var jobPostingController = require('./jobs/jobPostingController');
 var userController = require('./users/userController.js')
+var codeShareController = require('./codeShare/codeController.js');
 
 
 module.exports = function(apiRouter){
@@ -20,13 +21,23 @@ module.exports = function(apiRouter){
 
     apiRouter.post('/updateProfile', userController.updateProfile);
 
+    apiRouter.get( '/codeShare', codeShareController.getSharedCode);
+    apiRouter.post('/codeShare', codeShareController.createSharedCode);
+    apiRouter.post('/codeShare/upvote', codeShareController.upvote);
+
     /*     Routes beginning with /api/jobPostings
      See documentation at corresponding
      function in jobPostingController.js
      */
     apiRouter.get('/jobPostings', jobPostingController.getJobPosting);
     apiRouter.post('/jobPostings', jobPostingController.createJobPosting);
-    apiRouter.get('/jobPostings/:specificJob',jobPostingController.specificJobPosting)
+    //apiRouter.get('/jobPostings/:specificJob',jobPostingController.specificJobPosting);
+    apiRouter.put('/jobPostings/jobResume', jobPostingController.addResumeToJobPosting);
+
+    apiRouter.get('/jobPostings/appliedJobs', jobPostingController.appliedJobs);
+    apiRouter.get('/jobPostings/postedJobs', jobPostingController.postedJobs);
+
+
 
 
 }

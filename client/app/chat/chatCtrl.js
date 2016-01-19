@@ -10,9 +10,11 @@ angular.module('chat.controller', ['ui.router', 'luegg.directives', 'userFactory
 
   //sends a message to all clients
   $scope.sendMessage = function() {
-    ChatFactory.sendMessage($scope.message);
-    $scope.message = '';
-  }
+    if($scope.message !== ''){
+      ChatFactory.sendMessage($scope.message);
+      $scope.message = '';
+    }
+  };
 
   //sends a private message to a specific client
   $scope.sendPrivateMessage = function(message) {
