@@ -3,10 +3,8 @@ angular.module('codeShare.factory', [])
 
 .factory('CodeShare', function($http) {
 
-  var apiUrl = 'http://localhost:3000';
-
   var postCode = function(codeShare) {
-    return $http.post(apiUrl + '/api/codeShare', codeShare)
+    return $http.post('/api/codeShare', codeShare)
       .then(function(res) {
         return res.data;
       }, function(err) {
@@ -15,7 +13,7 @@ angular.module('codeShare.factory', [])
   };
 
   var getCode = function() {
-    return $http.get(apiUrl + '/api/codeShare', {
+    return $http.get('/api/codeShare', {
         params: {
           // jobTitle: jobSearch.jobTitle,
           // company: jobSearch.company
@@ -30,7 +28,7 @@ angular.module('codeShare.factory', [])
 
   var upvote = function(codeID, userID) {
     var data = {codeID: codeID, userID: userID};
-    return $http.post(apiUrl + '/api/codeShare/upvote', data)
+    return $http.post('/api/codeShare/upvote', data)
       .then(function(res) {
         return res.data;
       }, function(err) {
