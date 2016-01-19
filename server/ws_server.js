@@ -40,6 +40,11 @@ module.exports = function(server) {
     })
   };
 
+  //prevents timeout of clients by constantly sending a ping every second
+  setInterval(function() {
+    wss.broadcast('ping');
+  }, 1000);
+
   //commands object that manages all explicit server-side socket functionalities
   var commands = {
 
@@ -67,6 +72,7 @@ module.exports = function(server) {
         text: ws.USERNAME + ' has joined.',
         noreply: true
       }))
+      wss.broadcast('update');
     },
 
     //sends a message to ONLY a user, way more secure than broadcasting a message with specific user parameters
@@ -108,6 +114,7 @@ module.exports = function(server) {
         text: ws.USERNAME + ' has left.',
         noreply: true
       }))
+      wss.broadcast('update');
     });
 
     ws.on('message', function(data) {
@@ -120,3 +127,14 @@ module.exports = function(server) {
 
   })
 };
+
+module.exports.getClients = function() {
+  var result = [];
+  for (client in CLIENTS) {
+    result.push({
+      username: CLIENTS[client].USERNAME,
+      userid: CLIENTS[client].USERID
+    });
+  }
+  return result;
+}

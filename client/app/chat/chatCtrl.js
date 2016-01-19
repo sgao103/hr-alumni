@@ -3,8 +3,10 @@ angular.module('chat.controller', ['ui.router', 'luegg.directives', 'userFactory
 .controller('ChatCtrl', ['$scope', 'ChatFactory', 'User', function($scope, ChatFactory, User) {
   $scope.message = '';
   $scope.messages = ChatFactory.messages;
+  $scope.users = [];
 
   $scope.visible = function() {
+    $scope.users = ChatFactory.getUsers();
     return User.loggedIn();
   }
 
@@ -14,6 +16,7 @@ angular.module('chat.controller', ['ui.router', 'luegg.directives', 'userFactory
       ChatFactory.sendMessage($scope.message);
       $scope.message = '';
     }
+    console.log($scope.users);
   };
 
   //sends a private message to a specific client

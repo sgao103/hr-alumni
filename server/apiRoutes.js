@@ -4,7 +4,7 @@
 var jobPostingController = require('./jobs/jobPostingController');
 var userController = require('./users/userController.js')
 var codeShareController = require('./codeShare/codeController.js');
-
+var chatController = require('./chat/chatController.js');
 
 module.exports = function(apiRouter){
 
@@ -37,7 +37,7 @@ module.exports = function(apiRouter){
     apiRouter.get('/jobPostings/appliedJobs', jobPostingController.appliedJobs);
     apiRouter.get('/jobPostings/postedJobs', jobPostingController.postedJobs);
 
-
+    apiRouter.get('/chat/clients', chatController.getClients);
 
 
 }
