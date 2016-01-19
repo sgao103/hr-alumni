@@ -19,7 +19,10 @@ angular.module('app', ['ui.router',
     'jobPosting.jobPostingAppliedJob.controller',
     //Chat
     'chat.controller',
-    'chat.factory'
+    'chat.factory',
+    //CodeShare
+    'codeShare.controller',
+    'codeShare.factory',
 
 ])
 
@@ -27,10 +30,19 @@ angular.module('app', ['ui.router',
   // Attempt to log the user in if there is an
   var userID = window.localStorage.getItem('hr-alum.user.id');
   if (userID) User.login(userID);
-  // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 
-    if (!User.loggedIn() && toState.name !== 'app.login' && toState.name !== 'app.auth' && toState.name !== 'app.home') {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    var githubName = window.localStorage.getItem('hr-alum.user.githubName');
+
+    // Prevent unauthenticated users from accessing any states NOT listed below in the if conditional
+    if (!User.loggedIn() && toState.name !== 'app.login'
+                         && toState.name !== 'app.auth'
+                         && toState.name !== 'app.home') {
+      event.preventDefault();
+      $state.go('app.home');
+
+    // Prevent logged in users from being able to access and update other user's updateProfile section
+    } else if ( toState.name === 'app.updateProfile' && toParams.githubName !== githubName) {
       event.preventDefault();
       $state.go('app.home');
     }
@@ -45,10 +57,6 @@ angular.module('app', ['ui.router',
       views: {
         'mainContent@': {
           templateUrl: 'app/home/home.html',
-          controller: 'AppCtrl'
-        },
-        'header': {
-          templateUrl: 'app/_partials/nav.html',
           controller: 'AppCtrl'
         },
         'chat': {
@@ -103,6 +111,24 @@ angular.module('app', ['ui.router',
         }
       }
     })
+    .state('app.codeShare', {
+      url: 'codeShare',
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/codeShare/codeShare.html',
+          controller:  'CodeShareCtrl'
+        }
+      }
+    })
+    .state('app.codeShare.create', {
+      url: '/create',
+      views: {
+        'mainContent@': {
+          templateUrl: 'app/codeShare/codeShareCreate.html',
+          controller:  'CodeShareCtrl'
+        }
+      }
+    })      
     .state('app.jobPostings', {
       views: {
         'mainContent@': {

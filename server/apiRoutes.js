@@ -3,6 +3,7 @@
  */
 var jobPostingController = require('./jobs/jobPostingController');
 var userController = require('./users/userController.js')
+var codeShareController = require('./codeShare/codeController.js');
 
 
 module.exports = function(apiRouter){
@@ -19,6 +20,10 @@ module.exports = function(apiRouter){
 
 
     apiRouter.post('/updateProfile', userController.updateProfile);
+
+    apiRouter.get( '/codeShare', codeShareController.getSharedCode);
+    apiRouter.post('/codeShare', codeShareController.createSharedCode);
+    apiRouter.post('/codeShare/upvote', codeShareController.upvote);
 
     /*     Routes beginning with /api/jobPostings
      See documentation at corresponding

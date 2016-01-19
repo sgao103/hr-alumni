@@ -21,8 +21,11 @@ angular.module('userFactory', ['ui.router', 'chat.factory'])
                     details.name = response.data.name;
                     window.localStorage.setItem('hr-alum.user.id', response.data._id);
                     window.localStorage.setItem('hr-alum.user.name', response.data.name);
+                    window.localStorage.setItem('hr-alum.user.githubName', response.data.githubName);
+
                     ChatFactory.openConnection();
                   }
+                  return response;
                 });
   };
 
@@ -30,7 +33,10 @@ angular.module('userFactory', ['ui.router', 'chat.factory'])
     details.loggedIn = false;
     window.localStorage.removeItem('hr-alum.user.id');
     window.localStorage.removeItem('hr-alum.user.name');
+    window.localStorage.removeItem('hr-alum.user.githubName');
+
     ChatFactory.closeConnection();
+  
     $state.go('app.login');
   };
 
