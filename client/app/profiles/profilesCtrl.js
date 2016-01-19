@@ -7,9 +7,11 @@ angular.module('profiles.controller', ['ui.router'])
     $scope.categories = $scope.getCategories();
   });
 
+  $scope.categories = [];
+
   $scope.filter = {};
 
-  $scope.categories = [];
+  $scope.showCard = false;
 
   $scope.getCategories = function () {
     // want the keys of the profile object
@@ -40,6 +42,10 @@ angular.module('profiles.controller', ['ui.router'])
     }
 
     return true;
+  };
+
+  $scope.toggleCard = function() {
+      return $scope.showCard = !$scope.showCard;
   };
 
   // used for showing the modal in profiles.html
