@@ -18,11 +18,16 @@ angular.module('codeShare.controller', ['ui.router'])
     tags.splice( tags.indexOf(tag), 1 );
   };
 
+  $scope.hasVoted = function (code) {
+    var userID = window.localStorage.getItem('hr-alum.user.id');
+    return code.votesFrom.indexOf(userID) !== -1;
+  };
 
   $scope.upvote = function (code) {
     var userID = window.localStorage.getItem('hr-alum.user.id');
     if ( code.votesFrom.indexOf(userID) === -1 ) {
       code.votesFrom.push(userID);
+      code.upvotes++;
       CodeShare.upvote(code._id, userID);
     }
   };
@@ -33,7 +38,7 @@ angular.module('codeShare.controller', ['ui.router'])
       .then(function(){
         $state.go('app.codeShare');
       });
-  }
+  };
 
   CodeShare.getCode()
     .then(function(res) {
@@ -43,8 +48,6 @@ angular.module('codeShare.controller', ['ui.router'])
       //   $scope.currentProfile = Profile.setProfile(profile); 
       // }
     });
-
-  $
 
 
   // Opens modal window to display CodeShares

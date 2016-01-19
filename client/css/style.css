@@ -92,6 +92,7 @@ footer
   font-size: inherit;
 }
 
+/* Begin CodeShare Styling */
 .code-tag {
   border-radius: 3px;
   margin: 10px;
@@ -101,4 +102,20 @@ footer
   color: #EEEEEE;
   background-color:#22A3EF;
 }
+
+.upvote-btn {
+  border-radius: 3px;
+  margin: 10px;
+  padding: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #EEEEEE;
+  background-color:#22A3EF;
+}
+
+.upvote-count {
+  margin:10px;
+  font-size: 30px;
+}
+/* End CodeShare Styling */
 

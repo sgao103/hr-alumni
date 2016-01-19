@@ -13,9 +13,10 @@
         
       </div>
       <ul class="collection">
-        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms; padding-left:20px;" ng-repeat="code in codeShares | filter:query">
-        <div class="s3 col">
-          <span>{{code.upvotes}}</span><button ng-click="upvote(code)">+</button>
+        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms; padding-left:20px;" ng-repeat="code in codeShares | orderBy: '-upvotes' | filter:query ">
+        <div class="s3 col" style="padding-top:15px;">
+          <span class="upvote-count">{{code.upvotes}}</span>
+          <button ng-show="!hasVoted(code)" ng-click="upvote(code)" class="upvote-btn" >+1</button>
         </div>
         <div class="s9 col">
           
