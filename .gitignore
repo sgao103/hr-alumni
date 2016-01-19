@@ -4,6 +4,7 @@ node_modules/
 
 # Bower libraries
 lib/
+/client/bower_components/
 
 # Floobits
 .floo

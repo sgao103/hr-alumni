@@ -4,11 +4,11 @@ angular.module('jobPosting.factory', [])
 
 .factory('jobPostingFactory',function($http){
 
-    var apiUrl = 'http://localhost:3000';
+    var apiUrl = 'http://teslalegacy.herokuapp.com';
 
     var postJob = function(jobPosting){
 
-        return $http.post(apiUrl + '/api/jobPostings', jobPosting)
+        return $http.post(  '/api/jobPostings', jobPosting)
             .then(function(res) {
                 return res.data;
             }, function(err) {
@@ -19,7 +19,7 @@ angular.module('jobPosting.factory', [])
 
     var getJob = function(jobSearch){
 
-        return $http.get(apiUrl + '/api/jobPostings', {
+        return $http.get(  '/api/jobPostings', {
                 params : {
                     jobTitle : jobSearch.jobTitle,
                     company : jobSearch.company
@@ -43,7 +43,7 @@ angular.module('jobPosting.factory', [])
     //};
 
     var postResume = function(resumePosted){
-        return $http.put(apiUrl + '/api/jobPostings/jobResume', resumePosted)
+        return $http.put( '/api/jobPostings/jobResume', resumePosted)
             .then(function(res) {
                 return res.data;
             }, function(err) {
@@ -54,7 +54,7 @@ angular.module('jobPosting.factory', [])
 
     var appliedJobs = function(userID){
 
-        return $http.get(apiUrl + '/api/jobPostings/appliedJobs', {
+        return $http.get('/api/jobPostings/appliedJobs', {
             params : {
                 userID : userID
             }
@@ -69,7 +69,7 @@ angular.module('jobPosting.factory', [])
 
     var postedJobs = function(userID){
 
-        return $http.get(apiUrl + '/api/jobPostings/postedJobs', {
+        return $http.get( '/api/jobPostings/postedJobs', {
             params : {
                 userID : userID
             }

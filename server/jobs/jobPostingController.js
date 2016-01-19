@@ -1,6 +1,3 @@
-/**
- * Created by VaibhavNamburi on 15/01/2016.
- */
 var JobPosting = require('./jobPostingModel.js');
 var bluebird = require('bluebird');
 var util = require('../config/utils.js')
