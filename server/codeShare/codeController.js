@@ -38,5 +38,23 @@ module.exports = {
       .catch(function(err) {
         throw err;
       });
+  },
+
+  upvote : function (req, res, next) {
+    var userID = req.body.userID;
+    var codeID = req.body.codeID;
+
+    var updateCommand = { $addToSet: {"votesFrom": userID}, $inc: {upvotes: 1} }; // $addToSet will not add the value if it already exists
+
+    CodeShare.findByIdAndUpdate(codeID, updateCommand, {new:true}) // include updated values in dbResults
+      .then(function(dbResults){
+          var clientResults = {votesFrom: dbResults.votesFrom};
+          res.json(clientResults);
+      })
+      .catch(function(err){
+        throw err;
+      });
+
+
   }
 };

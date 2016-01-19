@@ -13,12 +13,18 @@
         
       </div>
       <ul class="collection">
-        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms" ng-repeat="code in codeShares | filter:query">
+        <li class="collection-item avatar animated fadeInUp" style="-webkit-animation-duration:{{$index * 300}}ms; padding-left:20px;" ng-repeat="code in codeShares | filter:query">
+        <div class="s3 col">
+          <span>{{code.upvotes}}</span><button ng-click="upvote(code)">+</button>
+        </div>
+        <div class="s9 col">
+          
           <a href="" ng-click="codeDetailsModal(code)" class="modal-trigger title"> {{code.title}}</a>
           <div style="padding:5px;">
           <label>Tagged</label>
-            <span ng-repeat="tag in code.tags" class="code-tag">{{tag}}</span>
+            <span ng-repeat="tag in code.tags | limitTo: 3" class="code-tag">{{tag}}</span>
           </div>
+        </div>
         </li>
       </ul>
     </div>
@@ -36,7 +42,7 @@
           <br>
           <label>Tags</label>
           <div>
-            <span ng-repeat="tag in code.tags" class="code-tag">{{tag}}</span>
+            <span ng-repeat="tag in code.tags | limitTo: 5" class="code-tag">{{tag}}</span>
           </div>
           <br/>
           <label>Description</label> {{code.description}}

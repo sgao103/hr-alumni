@@ -28,9 +28,20 @@ angular.module('codeShare.factory', [])
       });
   };
 
+  var upvote = function(codeID, userID) {
+    var data = {codeID: codeID, userID: userID};
+    return $http.post(apiUrl + '/api/codeShare/upvote', data)
+      .then(function(res) {
+        return res.data;
+      }, function(err) {
+        return err;
+      });
+  };
+
   return {
     postCode: postCode,
-    getCode: getCode
+    getCode : getCode,
+    upvote  : upvote
   };
 
 })

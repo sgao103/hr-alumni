@@ -23,6 +23,7 @@ module.exports = function(apiRouter){
 
     apiRouter.get( '/codeShare', codeShareController.getSharedCode);
     apiRouter.post('/codeShare', codeShareController.createSharedCode);
+    apiRouter.post('/codeShare/upvote', codeShareController.upvote);
 
     /*     Routes beginning with /api/jobPostings
      See documentation at corresponding
